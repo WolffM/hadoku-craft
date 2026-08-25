@@ -1,6 +1,6 @@
 {
   "name": "@wolffm/hadoku-printtool",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Image manipulation tool for cropping, resizing, and collating images for print",
   "type": "module",
   "packageManager": "pnpm@11.5.0",
