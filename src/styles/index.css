@@ -12,6 +12,8 @@
  *                   calibration variations, collage crop-anchor grid).
  *   images.css    — ImagePool (+ craft-spin keyframe), ImageUpload,
  *                   ImagePreview, ResultPreview (+ multi-sheet picker).
+ *   palette.css   — top-level route nav, plus the palette route's toolbar,
+ *                   image pane and swatch sidebar.
  *
  * Vite resolves these via the CSS @import below at build time and inlines
  * them into the single dist/style.css bundle.
@@ -22,3 +24,4 @@
 @import './settings.css';
 @import './images.css';
 @import './riftbound-editor.css';
+@import './palette.css';

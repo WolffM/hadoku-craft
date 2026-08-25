@@ -144,9 +144,7 @@ export function ActionButtons({
       {result && result.sheets && result.sheets.length > 1 && (
         <div className="craft-actions__downloads">
           <div className="craft-actions__download-group">
-            <span className="craft-actions__download-label">
-              All {result.sheets.length} Sheets
-            </span>
+            <span className="craft-actions__download-label">All {result.sheets.length} Sheets</span>
             <div className="craft-actions__download-buttons">
               <button
                 type="button"

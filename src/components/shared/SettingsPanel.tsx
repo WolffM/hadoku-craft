@@ -27,9 +27,7 @@ interface SettingsPanelProps {
  * settings component; wrap `<SettingsSection>`s inside.
  */
 export function SettingsPanel({ className, children }: SettingsPanelProps) {
-  return (
-    <div className={`craft-settings-panel${className ? ` ${className}` : ''}`}>{children}</div>
-  )
+  return <div className={`craft-settings-panel${className ? ` ${className}` : ''}`}>{children}</div>
 }
 
 interface SettingsSectionProps {

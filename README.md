@@ -1,6 +1,10 @@
 # @wolffm/hadoku-craft
 
-Image manipulation tool for tiling, collaging, and preparing images for print-ready output.
+Print-prep and colour toolkit: tile, collage and lay out images for print, and pull colour
+palettes out of them.
+
+Formerly `@wolffm/hadoku-printtool`. The print tool is now one of two routes; the second
+absorbed the standalone [color_palette_picker](https://github.com/WolffM/color_palette_picker).
 
 ## API Package
 
@@ -13,9 +17,47 @@ export default createCraftHandler('/craft/api')
 
 ## Overview
 
-Craft is a React-based child app that provides image manipulation capabilities for preparing print-ready outputs. Integrates with the hadoku parent site for theming and deployment.
+Craft is a React-based child app. It integrates with the hadoku parent site for theming and
+deployment.
 
-## Modes
+## Routes
+
+| Route            | What it does                                         |
+| ---------------- | ---------------------------------------------------- |
+| `/craft`         | **Print** — the print modes listed below             |
+| `/craft/palette` | **Palette** — extract a colour palette from an image |
+
+Routing is hand-rolled (`src/routes.ts`) — two routes, no params, and this app ships as a
+library into a host that already owns the document, so a router dependency would not earn
+its weight. The mount path is discovered from `location.pathname` rather than hard-coded,
+so the same build works at `/craft/palette` in production and `/palette` under vite.
+
+Switching routes uses `pushState`; a real navigation would tear down the host page. Back and
+forward work via `popstate`.
+
+## Palette
+
+Load an image, then build a palette of up to 21 colours:
+
+- **Click the image** to sample a colour (3x3 average, so JPEG noise doesn't decide the value)
+- **Pan** by dragging, **zoom** with the wheel
+- **Prefill** — extract the image's dominant colours
+- **Prefill (5+16)** — build a colour _system_: a primary plus four variations, then four
+  secondaries plus three each
+- **Crop-Prefill** (the ⌐ button beside either prefill) — drag a rectangle and extract from
+  just that region
+- **Copy Palette** (comma-separated hex) or **Export Palette** (a labelled PNG grid)
+- **Undo** up to 10 steps
+
+Keyboard: `Ctrl+Z` undo, `Ctrl+C` copy, `Ctrl+E` export, `Ctrl+S` crop-prefill,
+`Ctrl+D` crop-prefill 5+16.
+
+Colour extraction is modified median-cut quantization (MMCQ) implemented in
+`src/domain/palette/quantize.ts`. The standalone tool loaded ColorThief from a CDN, which a
+published library cannot do; porting it in also removed ColorThief's 20-colour clamp (so a
+prefill can fill all 21 slots) and made the extractor unit-testable.
+
+## Print modes
 
 - **Simple Tiling** - Tile a single image across a page (e.g., wallet photos, stickers)
 - **Duplex Printing** - Create front/back sheets for double-sided postcards
@@ -61,6 +103,9 @@ pnpm dev
 
 # Build for production
 pnpm build
+
+# Run the test suite
+pnpm test
 
 # Lint and format
 pnpm lint:fix

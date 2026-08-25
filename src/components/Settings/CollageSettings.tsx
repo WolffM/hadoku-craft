@@ -42,9 +42,7 @@ export function CollageSettings({ settings, onChange }: CollageSettingsProps) {
             </option>
           ))}
         </select>
-        <p className="craft-settings__hint">
-          {COLLAGE_ALGORITHM_DESCRIPTIONS[settings.algorithm]}
-        </p>
+        <p className="craft-settings__hint">{COLLAGE_ALGORITHM_DESCRIPTIONS[settings.algorithm]}</p>
       </div>
 
       {/* Paper Size */}
@@ -92,9 +90,7 @@ export function CollageSettings({ settings, onChange }: CollageSettingsProps) {
 
       {/* Gap Size */}
       <div className="craft-settings__group">
-        <label className="craft-settings__label">
-          Gap Size: {settings.gapInches.toFixed(3)}"
-        </label>
+        <label className="craft-settings__label">Gap Size: {settings.gapInches.toFixed(3)}"</label>
         <input
           type="range"
           className="craft-settings__slider"
@@ -183,9 +179,7 @@ export function CollageSettings({ settings, onChange }: CollageSettingsProps) {
       {settings.allowCropping && (
         <>
           <div className="craft-settings__group craft-settings__group--nested">
-            <label className="craft-settings__label">
-              Max Crop: {settings.maxCropPercent}%
-            </label>
+            <label className="craft-settings__label">Max Crop: {settings.maxCropPercent}%</label>
             <input
               type="range"
               className="craft-settings__slider"

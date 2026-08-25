@@ -1,0 +1,320 @@
+/**
+ * Palette route — top-level section nav, toolbar, image pane, swatch sidebar.
+ *
+ * The standalone tool shipped its own dark palette in hex. Everything here
+ * takes @wolffm/themes tokens instead, so the route follows whatever theme the
+ * rest of hadoku is wearing. The only literal colours left are the two that
+ * genuinely cannot be themed: the swatch fill (it IS the user's colour, set
+ * inline) and the scrim over a cropped image.
+ */
+
+/* Section nav ------------------------------------------------------------ */
+
+.craft-route-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.craft-route-nav__link {
+  padding: 0.6rem 1.25rem;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--hdk-text-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.craft-route-nav__link:hover {
+  color: var(--color-text);
+}
+
+/* The primary colour carries the active state as the underline, not as the
+   label: as bare text on a card surface it fails AA in most themes. */
+.craft-route-nav__link--active {
+  border-bottom-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+/* Layout ----------------------------------------------------------------- */
+
+.craft-palette {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.craft-palette__layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .craft-palette__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.craft-palette__file-input {
+  display: none;
+}
+
+/* Toolbar ---------------------------------------------------------------- */
+
+.craft-palette-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--color-bg-alt);
+  border-radius: var(--hdk-radius);
+}
+
+.craft-palette-toolbar__group {
+  display: flex;
+  gap: 1px;
+}
+
+.craft-palette-toolbar__spacer {
+  flex: 1;
+}
+
+.craft-palette-toolbar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--hdk-radius);
+  background-color: var(--color-bg-card);
+  color: var(--color-text);
+  font-size: var(--hdk-text-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.craft-palette-toolbar__btn:hover:not(:disabled) {
+  background-color: var(--color-bg-hover);
+}
+
+.craft-palette-toolbar__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* The crop button is a modifier on the prefill beside it, so the pair reads
+   as one control: square, and welded to its sibling's right edge. */
+.craft-palette-toolbar__group .craft-palette-toolbar__btn:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.craft-palette-toolbar__btn--sub {
+  padding: 0.5rem 0.6rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none;
+}
+
+/* Armed = the next drag draws a crop box. Filled, so it is obvious that the
+   canvas is in a different mode than it was a moment ago. */
+.craft-palette-toolbar__btn--armed {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.craft-palette-toolbar__btn--armed:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+/* Tint at rest, filled on hover — the -bg/on--bg pair is the only danger
+   colouring that holds contrast as text across themes. */
+.craft-palette-toolbar__btn--danger:not(:disabled) {
+  background-color: var(--color-danger-bg);
+  border-color: var(--color-danger);
+  color: var(--color-on-danger-bg);
+}
+
+.craft-palette-toolbar__btn--danger:hover:not(:disabled) {
+  background-color: var(--color-danger);
+  color: var(--color-on-danger);
+}
+
+.craft-palette-toolbar__zoom {
+  padding: 0 0.5rem;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono, monospace);
+  font-size: var(--hdk-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Image pane ------------------------------------------------------------- */
+
+/* Height must be DEFINITE, and the canvas must stay out of flow.
+   With an auto-height pane, the canvas's intrinsic size (its width/height
+   attributes) sets the pane's height, while the ResizeObserver sets those
+   attributes from the pane's height — a feedback loop that pegs a core and
+   hangs the tab. Absolute positioning breaks the cycle at the layout end,
+   the fixed height breaks it at the measurement end. */
+.craft-palette-canvas {
+  position: relative;
+  overflow: hidden;
+  height: min(70vh, 760px);
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--hdk-radius);
+}
+
+.craft-palette-canvas__surface {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.craft-palette-canvas__surface--cropping {
+  cursor: cell;
+}
+
+.craft-palette-canvas__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.craft-palette-canvas__empty:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.craft-palette-canvas__empty-title {
+  font-size: var(--hdk-text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.craft-palette-canvas__empty-hint {
+  font-size: var(--hdk-text-sm);
+}
+
+/* Swatch sidebar --------------------------------------------------------- */
+
+.craft-palette-swatches {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--hdk-radius);
+  /* Matches the canvas pane so a full 21-swatch list scrolls inside the
+     column instead of stretching the row past the image. */
+  height: min(70vh, 760px);
+  overflow-y: auto;
+}
+
+.craft-palette-swatches__title {
+  margin: 0;
+  font-size: var(--hdk-text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.craft-palette-swatches__count {
+  color: var(--color-text-secondary);
+  font-size: var(--hdk-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.craft-palette-swatches__empty {
+  margin: 0.5rem 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--hdk-text-sm);
+  line-height: 1.5;
+}
+
+.craft-palette-swatches__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.craft-palette-swatches__item {
+  position: relative;
+  display: flex;
+}
+
+.craft-palette-swatches__swatch {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--hdk-radius);
+  cursor: pointer;
+  text-align: left;
+  /* background-color and color are set inline: the swatch IS the user's
+     colour, and its label is whichever of black/white stays legible on it. */
+}
+
+.craft-palette-swatches__hex {
+  font-family: var(--font-family-mono, monospace);
+  font-size: var(--hdk-text-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.03em;
+}
+
+.craft-palette-swatches__remove {
+  position: absolute;
+  top: 50%;
+  right: 0.4rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--color-image-scrim);
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Keep the remove button out of the way until it is wanted — but never hide
+   it from the keyboard, or the swatch becomes impossible to delete without a
+   mouse. */
+.craft-palette-swatches__item:hover .craft-palette-swatches__remove,
+.craft-palette-swatches__remove:focus-visible {
+  opacity: 1;
+}
+
+.craft-palette-swatches__remove:hover {
+  background-color: var(--color-image-scrim-strong);
+}

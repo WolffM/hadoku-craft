@@ -34,10 +34,7 @@ export function ProcessingOverlay({
           <div className="craft-processing-overlay__progress">
             <span className="craft-processing-overlay__message">{progress.message}</span>
             <div className="craft-processing-overlay__bar">
-              <div
-                className="craft-processing-overlay__fill"
-                style={{ width: `${percentage}%` }}
-              />
+              <div className="craft-processing-overlay__fill" style={{ width: `${percentage}%` }} />
             </div>
             <span className="craft-processing-overlay__stats">
               {progress.step} / {progress.total} ({percentage}%)

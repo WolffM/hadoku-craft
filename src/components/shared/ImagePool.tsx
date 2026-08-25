@@ -239,11 +239,7 @@ export function ImagePool<T extends PooledImage = PooledImage>({
                   highlighted ? ' craft-image-pool__thumbnail--highlighted' : ''
                 }`}
               >
-                <img
-                  src={img.dataUrl}
-                  alt={img.name}
-                  className="craft-image-pool__thumbnail-img"
-                />
+                <img src={img.dataUrl} alt={img.name} className="craft-image-pool__thumbnail-img" />
                 <button
                   type="button"
                   className="craft-image-pool__thumbnail-remove"
