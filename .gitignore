@@ -1,6 +1,5 @@
 # Dependencies
-node_modules/
-
+node_modules
 # Local scratch / sample decks (not version-controlled)
 temp/
 
