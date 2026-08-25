@@ -10,6 +10,11 @@ export default [
       '**/dist/**',
       '**/node_modules/**',
       '**/coverage/**',
+      // Linked git worktrees live here (see the worktree convention in the
+      // working agreement). They are full checkouts of this same repo, so
+      // without this every source file gets linted twice — and the second copy
+      // is outside tsconfig's `include`, so the type-aware rules fail on it.
+      '.claude/worktrees/**',
       '**/*.test.ts',
       '**/*.test.tsx',
       '**/vite.config.ts',
