@@ -67,6 +67,18 @@ jobs:
           # gap one version at a time on every publish (tenhands died at
           # attempt 99 of exactly that on 2026-08-05). From latest, one step.
           latest_published=$(pnpm view "${package_name}" version 2>/dev/null || echo "")
+
+          # `pnpm view` on a name that has NEVER been published writes its 404 to
+          # STDOUT and still exits 0, so the capture above yields an error string
+          # rather than "". That string then sorts as the newest "version", gets
+          # written into package.json, and publish dies building a tarball named
+          # after the error. Broke the first publish of @wolffm/hadoku-craft on
+          # 2026-08-25 (the rename from @wolffm/hadoku-printtool). Only accept
+          # something that actually looks like a version.
+          if ! printf '%s' "$latest_published" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+'; then
+            latest_published=""
+          fi
+
           if [ -n "$latest_published" ]; then
             new_version=$(printf '%s\n%s\n' "$current_version" "$latest_published" | sort -V | tail -1)
             echo "Registry latest: $latest_published; starting walk at $new_version"
