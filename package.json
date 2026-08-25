@@ -1,6 +1,6 @@
 {
   "name": "@wolffm/hadoku-craft",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Print-prep and color-palette toolkit: crop, resize, collate images for print, and extract palettes from images",
   "type": "module",
   "packageManager": "pnpm@11.5.0",

@@ -47,3 +47,9 @@ coverage/
 # Temporary
 .tmp/
 .cache/
+
+# Agent worktrees (`git worktree add .claude/worktrees/<task>`). A worktree is
+# a FULL second checkout, so without this a `git add -A` commits one whole.
+# Scoped deliberately: the REST of .claude/ is tracked (2 files are here), and a
+# blanket `.claude/` would silently swallow the next file added to it.
+.claude/worktrees/
