@@ -8,7 +8,7 @@ import {
   ExportResponseSchema
 } from './schemas'
 
-export function createPrinttoolHandler(basePath: string) {
+export function createCraftHandler(basePath: string) {
   const app = new OpenAPIHono().basePath(basePath)
 
   const healthRoute = createRoute({
@@ -31,7 +31,7 @@ export function createPrinttoolHandler(basePath: string) {
         success: true as const,
         data: {
           status: 'healthy' as const,
-          service: 'printtool-api' as const,
+          service: 'craft-api' as const,
           timestamp: new Date().toISOString(),
           note: 'Processing requests are forwarded to local server via Cloudflare Tunnel'
         }
@@ -129,7 +129,7 @@ The local server must be running for this endpoint to work.
   app.doc('/openapi.json', {
     openapi: '3.0.0',
     info: {
-      title: 'PrintTool API',
+      title: 'Craft API',
       version: '1.0.0',
       description: `
 Print calibration and export API powered by ImageMagick.
@@ -142,8 +142,8 @@ This API uses a hybrid architecture:
       `.trim()
     },
     servers: [
-      { url: 'https://hadoku.me/printtool/api', description: 'Production' },
-      { url: 'http://localhost:8787/printtool/api', description: 'Local development' }
+      { url: 'https://hadoku.me/craft/api', description: 'Production' },
+      { url: 'http://localhost:8787/craft/api', description: 'Local development' }
     ],
     tags: [
       { name: 'Health', description: 'Health check endpoint' },

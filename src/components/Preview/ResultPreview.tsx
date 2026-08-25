@@ -65,8 +65,8 @@ export function ResultPreview({ result, mode }: ResultPreviewProps) {
 
   if (!result) {
     return (
-      <div className="printtool-result-preview printtool-result-preview--empty">
-        <div className="printtool-result-preview__placeholder">
+      <div className="craft-result-preview craft-result-preview--empty">
+        <div className="craft-result-preview__placeholder">
           <p>Process an image to see the result</p>
         </div>
       </div>
@@ -76,24 +76,24 @@ export function ResultPreview({ result, mode }: ResultPreviewProps) {
   const multiSheet = sheets && sheets.length > 1
 
   return (
-    <div className="printtool-result-preview">
+    <div className="craft-result-preview">
       {multiSheet && (
-        <div className="printtool-result-preview__sheet-picker">
+        <div className="craft-result-preview__sheet-picker">
           <button
             type="button"
-            className="printtool-result-preview__sheet-nav"
+            className="craft-result-preview__sheet-nav"
             onClick={() => setSheetIndex(Math.max(0, sheetIndex - 1))}
             disabled={sheetIndex === 0}
             aria-label="Previous sheet"
           >
             ‹
           </button>
-          <span className="printtool-result-preview__sheet-label">
+          <span className="craft-result-preview__sheet-label">
             Sheet {sheetIndex + 1} of {sheets.length}
           </span>
           <button
             type="button"
-            className="printtool-result-preview__sheet-nav"
+            className="craft-result-preview__sheet-nav"
             onClick={() => setSheetIndex(Math.min(sheets.length - 1, sheetIndex + 1))}
             disabled={sheetIndex === sheets.length - 1}
             aria-label="Next sheet"
@@ -104,11 +104,11 @@ export function ResultPreview({ result, mode }: ResultPreviewProps) {
       )}
 
       {isDuplex && (
-        <div className="printtool-result-preview__toggle">
+        <div className="craft-result-preview__toggle">
           <button
             type="button"
-            className={`printtool-result-preview__toggle-btn ${
-              !showBack ? 'printtool-result-preview__toggle-btn--active' : ''
+            className={`craft-result-preview__toggle-btn ${
+              !showBack ? 'craft-result-preview__toggle-btn--active' : ''
             }`}
             onClick={() => setShowBack(false)}
           >
@@ -116,8 +116,8 @@ export function ResultPreview({ result, mode }: ResultPreviewProps) {
           </button>
           <button
             type="button"
-            className={`printtool-result-preview__toggle-btn ${
-              showBack ? 'printtool-result-preview__toggle-btn--active' : ''
+            className={`craft-result-preview__toggle-btn ${
+              showBack ? 'craft-result-preview__toggle-btn--active' : ''
             }`}
             onClick={() => setShowBack(true)}
           >
@@ -126,12 +126,12 @@ export function ResultPreview({ result, mode }: ResultPreviewProps) {
         </div>
       )}
 
-      <div className="printtool-result-preview__canvas-container">
-        <canvas ref={canvasRef} className="printtool-result-preview__canvas" />
+      <div className="craft-result-preview__canvas-container">
+        <canvas ref={canvasRef} className="craft-result-preview__canvas" />
       </div>
 
       {(result.layoutInfo || isDuplex) && (
-        <div className="printtool-result-preview__info">
+        <div className="craft-result-preview__info">
           {result.layoutInfo && (
             <>
               <span>

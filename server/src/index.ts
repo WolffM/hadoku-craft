@@ -1,5 +1,5 @@
 /**
- * PrintTool Local Processing Server
+ * Craft Local Processing Server
  *
  * Runs on your local machine and receives requests via Cloudflare Tunnel.
  * Processes images using ImageMagick and returns the results.
@@ -24,7 +24,7 @@ import {
 } from './imagemagick.js'
 import { processSticker, checkStickerEnvironment, type StickerImageInput } from './sticker.js'
 
-const app = new Hono().basePath('/printtool/api')
+const app = new Hono().basePath('/craft/api')
 
 // CORS middleware
 app.use('*', cors())
@@ -45,7 +45,7 @@ app.get('/health', async c => {
     success: true,
     data: {
       status: hasImageMagick && stickerEnv.python ? 'healthy' : 'degraded',
-      service: 'printtool-local',
+      service: 'craft-local',
       timestamp: new Date().toISOString(),
       imagemagick: hasImageMagick,
       sticker: stickerEnv,
@@ -263,12 +263,12 @@ async function main() {
     console.log('ImageMagick detected')
   }
 
-  console.log(`PrintTool Local Server starting on port ${port}`)
+  console.log(`Craft Local Server starting on port ${port}`)
   console.log(`Endpoints:`)
-  console.log(`  GET  /printtool/api/health`)
-  console.log(`  POST /printtool/api/calibration`)
-  console.log(`  POST /printtool/api/export`)
-  console.log(`  POST /printtool/api/sticker`)
+  console.log(`  GET  /craft/api/health`)
+  console.log(`  POST /craft/api/calibration`)
+  console.log(`  POST /craft/api/export`)
+  console.log(`  POST /craft/api/sticker`)
   console.log('')
   console.log('Ensure Cloudflare Tunnel is running to receive requests from hadoku.me')
 

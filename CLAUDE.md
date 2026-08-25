@@ -1,4 +1,4 @@
-# @wolffm/hadoku-printtool
+# @wolffm/hadoku-craft
 
 ## What This Is
 
@@ -11,7 +11,7 @@ Three components: React UI library, CF Worker API, local ImageMagick server.
   - Entry: `src/entry.tsx` exports `mount(el, props)` / `unmount(el)`
   - Domain logic in `src/domain/`, UI in `src/components/`
 - `worker/` — CF Worker API handler. Builds to `dist/worker.js`
-  - Entry: `worker/src/index.ts` exports `createPrinttoolHandler(basePath)`
+  - Entry: `worker/src/index.ts` exports `createCraftHandler(basePath)`
   - OpenAPI schemas in `worker/src/schemas.ts`
 - `server/` — Local-only Node server (NOT published). ImageMagick + Python pipelines.
   - Runs via PM2: `pnpm local:start`
@@ -34,7 +34,7 @@ python -m venv .venv
 
 ## Contracts
 
-This repo publishes `@wolffm/hadoku-printtool` to GitHub Packages.
+This repo publishes `@wolffm/hadoku-craft` to GitHub Packages.
 
 - Default export: UI library with `mount(el)` / `unmount(el)` (from `src/entry.tsx`)
 - `./api` subpath: CF Worker handler factory (from `worker/src/index.ts`)
@@ -71,7 +71,7 @@ Read `node_modules/@wolffm/themes/THEME_USAGE_GUIDE.md` before writing styles.
 ## External Dependencies
 
 - Parent site: `../hadoku_site/` (GitHub: WolffM/hadoku_site)
-- Production URL: hadoku.me/printtool/api
+- Production URL: hadoku.me/craft/api
 - Tunnel: managed by hadoku-site cloudflared config
 
 ## Versioning

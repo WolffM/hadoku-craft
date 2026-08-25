@@ -1,19 +1,19 @@
-# @wolffm/hadoku-printtool
+# @wolffm/hadoku-craft
 
 Image manipulation tool for tiling, collaging, and preparing images for print-ready output.
 
 ## API Package
 
-The `@wolffm/hadoku-printtool/api` subpath exports a Cloudflare Worker handler factory:
+The `@wolffm/hadoku-craft/api` subpath exports a Cloudflare Worker handler factory:
 
 ```ts
-import { createPrinttoolHandler } from '@wolffm/hadoku-printtool/api'
-export default createPrinttoolHandler('/printtool/api')
+import { createCraftHandler } from '@wolffm/hadoku-craft/api'
+export default createCraftHandler('/craft/api')
 ```
 
 ## Overview
 
-Print Tool is a React-based child app that provides image manipulation capabilities for preparing print-ready outputs. Integrates with the hadoku parent site for theming and deployment.
+Craft is a React-based child app that provides image manipulation capabilities for preparing print-ready outputs. Integrates with the hadoku parent site for theming and deployment.
 
 ## Modes
 
@@ -87,7 +87,7 @@ This app is a child component of the [hadoku_site](https://github.com/WolffM/had
 ### Props
 
 ```typescript
-interface PrintToolProps {
+interface CraftProps {
   theme?: string // 'light', 'dark', 'coffee-dark', etc.
 }
 ```
@@ -95,7 +95,7 @@ interface PrintToolProps {
 ### Mounting
 
 ```typescript
-import { mount, unmount } from '@wolffm/hadoku-printtool'
+import { mount, unmount } from '@wolffm/hadoku-craft'
 
 // Mount the app
 mount(document.getElementById('app-root'), {

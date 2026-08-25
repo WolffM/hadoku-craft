@@ -6,7 +6,7 @@ import type { ModeModule } from './types'
 import { CalibrationSettings } from '../../components/Settings/CalibrationSettings'
 import { SourceImageSlot } from './simpleMode'
 import { VARIATION_PRESETS, CALIBRATION_GRIDS } from '../constants'
-import { generateCalibrationSheet, checkApiHealth, tiffToCanvas } from '../../api/printToolApi'
+import { generateCalibrationSheet, checkApiHealth, tiffToCanvas } from '../../api/craftApi'
 
 export const calibrationMode: ModeModule = {
   id: 'calibration',
@@ -40,7 +40,7 @@ export const calibrationMode: ModeModule = {
     const isHealthy = await checkApiHealth()
     if (!isHealthy) {
       throw new Error(
-        'Local processing server is offline. Start it with: cd hadoku-printTool && pnpm local:start'
+        'Local processing server is offline. Start it with: cd hadoku-craft && pnpm local:start'
       )
     }
 

@@ -37,15 +37,15 @@ export function CalibrationSettings({
   const activeVariations = variations.slice(0, totalCells)
 
   return (
-    <SettingsPanel className="printtool-calibration-settings">
+    <SettingsPanel className="craft-calibration-settings">
       <SettingsSection title="Grid Settings">
-        <div className="printtool-calibration-settings__group">
-          <label className="printtool-calibration-settings__label" htmlFor="calib-grid">
+        <div className="craft-calibration-settings__group">
+          <label className="craft-calibration-settings__label" htmlFor="calib-grid">
             Grid Size
           </label>
           <select
             id="calib-grid"
-            className="printtool-calibration-settings__select"
+            className="craft-calibration-settings__select"
             value={calibrationGrid}
             onChange={e => onGridChange(e.target.value as CalibrationGridKey)}
           >
@@ -57,13 +57,13 @@ export function CalibrationSettings({
           </select>
         </div>
 
-        <div className="printtool-calibration-settings__group">
-          <label className="printtool-calibration-settings__label" htmlFor="calib-dpi">
+        <div className="craft-calibration-settings__group">
+          <label className="craft-calibration-settings__label" htmlFor="calib-dpi">
             Output DPI
           </label>
           <select
             id="calib-dpi"
-            className="printtool-calibration-settings__select"
+            className="craft-calibration-settings__select"
             value={calibrationDpi}
             onChange={e => onDpiChange(parseInt(e.target.value, 10))}
           >
@@ -77,13 +77,13 @@ export function CalibrationSettings({
       </SettingsSection>
 
       <SettingsSection title="Variation Preset">
-        <div className="printtool-calibration-settings__group">
-          <label className="printtool-calibration-settings__label" htmlFor="calib-preset">
+        <div className="craft-calibration-settings__group">
+          <label className="craft-calibration-settings__label" htmlFor="calib-preset">
             Preset
           </label>
           <select
             id="calib-preset"
-            className="printtool-calibration-settings__select"
+            className="craft-calibration-settings__select"
             value={calibrationPreset}
             onChange={e => onPresetChange(e.target.value as VariationPresetKey)}
           >
@@ -95,25 +95,25 @@ export function CalibrationSettings({
           </select>
         </div>
 
-        <div className="printtool-calibration-settings__variations">
-          <div className="printtool-calibration-settings__variations-label">
+        <div className="craft-calibration-settings__variations">
+          <div className="craft-calibration-settings__variations-label">
             Variations ({activeVariations.length} of {totalCells})
           </div>
-          <div className="printtool-calibration-settings__variations-grid">
+          <div className="craft-calibration-settings__variations-grid">
             {activeVariations.map((variation, index) => (
               <button
                 key={index}
                 type="button"
-                className={`printtool-calibration-settings__variation ${
+                className={`craft-calibration-settings__variation ${
                   index === selectedVariationIndex
-                    ? 'printtool-calibration-settings__variation--selected'
+                    ? 'craft-calibration-settings__variation--selected'
                     : ''
                 }`}
                 onClick={() => onVariationSelect(index)}
                 title={variation.label}
               >
                 {sourceImageUrl ? (
-                  <div className="printtool-calibration-settings__variation-preview">
+                  <div className="craft-calibration-settings__variation-preview">
                     <img
                       src={sourceImageUrl}
                       alt={variation.label}
@@ -121,9 +121,9 @@ export function CalibrationSettings({
                     />
                   </div>
                 ) : (
-                  <div className="printtool-calibration-settings__variation-placeholder" />
+                  <div className="craft-calibration-settings__variation-placeholder" />
                 )}
-                <span className="printtool-calibration-settings__variation-label">
+                <span className="craft-calibration-settings__variation-label">
                   {variation.label}
                 </span>
               </button>
@@ -132,10 +132,10 @@ export function CalibrationSettings({
         </div>
 
         {selectedVariationIndex >= 0 && activeVariations[selectedVariationIndex] && (
-          <div className="printtool-calibration-settings__selected-info">
+          <div className="craft-calibration-settings__selected-info">
             <strong>Selected:</strong> {activeVariations[selectedVariationIndex].label}
             {activeVariations[selectedVariationIndex].args.length > 0 && (
-              <div className="printtool-calibration-settings__args">
+              <div className="craft-calibration-settings__args">
                 {activeVariations[selectedVariationIndex].args.join(' ')}
               </div>
             )}

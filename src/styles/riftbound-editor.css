@@ -5,7 +5,7 @@
  * before saving.
  */
 
-.printtool-riftbound-editor {
+.craft-riftbound-editor {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -15,12 +15,12 @@
   border-radius: var(--hdk-radius);
 }
 
-.printtool-riftbound-editor--empty {
+.craft-riftbound-editor--empty {
   align-items: center;
   text-align: center;
 }
 
-.printtool-riftbound-editor__header {
+.craft-riftbound-editor__header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -28,25 +28,25 @@
   flex-wrap: wrap;
 }
 
-.printtool-riftbound-editor__title {
+.craft-riftbound-editor__title {
   margin: 0;
   font-size: var(--hdk-text-base);
   font-weight: var(--font-weight-semibold, 600);
   color: var(--color-text);
 }
 
-.printtool-riftbound-editor__subtitle {
+.craft-riftbound-editor__subtitle {
   margin: 0.25rem 0 0;
   font-size: var(--hdk-text-sm);
   color: var(--color-text-secondary);
 }
 
-.printtool-riftbound-editor__header-actions {
+.craft-riftbound-editor__header-actions {
   display: flex;
   gap: 0.5rem;
 }
 
-.printtool-riftbound-editor__error {
+.craft-riftbound-editor__error {
   padding: 0.5rem 0.75rem;
   background-color: var(--color-danger-bg);
   color: var(--color-on-danger-bg);
@@ -55,13 +55,13 @@
   font-size: var(--hdk-text-sm);
 }
 
-.printtool-riftbound-editor__grid {
+.craft-riftbound-editor__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
 }
 
-.printtool-riftbound-editor__slot {
+.craft-riftbound-editor__slot {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -71,7 +71,7 @@
   border-radius: calc(var(--hdk-radius) - 2px);
 }
 
-.printtool-riftbound-editor__select {
+.craft-riftbound-editor__select {
   width: 100%;
   padding: 0.35rem 0.5rem;
   font-size: var(--hdk-text-xs);
@@ -81,12 +81,12 @@
   color: var(--color-text);
 }
 
-.printtool-riftbound-editor__select:disabled {
+.craft-riftbound-editor__select:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.printtool-riftbound-editor__thumb {
+.craft-riftbound-editor__thumb {
   position: relative;
   display: flex;
   align-items: center;
@@ -97,21 +97,21 @@
   overflow: hidden;
 }
 
-.printtool-riftbound-editor__thumb img {
+.craft-riftbound-editor__thumb img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
 }
 
-.printtool-riftbound-editor__thumb-missing {
+.craft-riftbound-editor__thumb-missing {
   padding: 0.5rem;
   font-size: var(--hdk-text-xs);
   color: var(--color-text-secondary);
   text-align: center;
 }
 
-.printtool-riftbound-editor__caption {
+.craft-riftbound-editor__caption {
   font-size: var(--hdk-text-xs);
   color: var(--color-text-secondary);
   white-space: nowrap;
@@ -119,19 +119,19 @@
   text-overflow: ellipsis;
 }
 
-.printtool-riftbound-editor__pager {
+.craft-riftbound-editor__pager {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
 }
 
-.printtool-riftbound-editor__pager-label {
+.craft-riftbound-editor__pager-label {
   font-size: var(--hdk-text-sm);
   color: var(--color-text-secondary);
 }
 
-.printtool-riftbound-editor__button {
+.craft-riftbound-editor__button {
   padding: 0.5rem 0.85rem;
   font-size: var(--hdk-text-sm);
   font-weight: var(--font-weight-semibold);
@@ -145,26 +145,26 @@
     border-color 120ms ease;
 }
 
-.printtool-riftbound-editor__button:hover:not(:disabled) {
+.craft-riftbound-editor__button:hover:not(:disabled) {
   background-color: var(--color-bg-alt);
 }
 
-.printtool-riftbound-editor__button:disabled {
+.craft-riftbound-editor__button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.printtool-riftbound-editor__button--primary {
+.craft-riftbound-editor__button--primary {
   background-color: var(--color-primary);
   color: var(--color-text-on-primary);
   border-color: var(--color-primary);
 }
 
-.printtool-riftbound-editor__button--primary:hover:not(:disabled) {
+.craft-riftbound-editor__button--primary:hover:not(:disabled) {
   background-color: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
 }
 
-.printtool-riftbound-editor__button--ghost {
+.craft-riftbound-editor__button--ghost {
   background-color: transparent;
 }

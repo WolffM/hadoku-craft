@@ -149,7 +149,7 @@ jobs:
             {
               "event_type": "packages_updated",
               "client_payload": {
-                "packages": ["@wolffm/hadoku-printtool"],
+                "packages": ["@wolffm/hadoku-craft"],
                 "sha": "${{ github.sha }}",
                 "ref": "${{ github.ref }}"
               }

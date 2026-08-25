@@ -40,7 +40,7 @@ export function StickerSettings({
   }
 
   return (
-    <SettingsPanel className="printtool-sticker-settings">
+    <SettingsPanel className="craft-sticker-settings">
       <SettingsSection
         title="Sticker Images"
         description='Raw images (backgrounds removed by the pipeline) or pre-cleaned PNGs with transparent backgrounds. Pipeline adds 0.2" of padding, draws a cutline, and tiles onto an 8.5"×11" sheet at 300 DPI.'
@@ -55,8 +55,8 @@ export function StickerSettings({
       </SettingsSection>
 
       <SettingsSection title="Pipeline Settings">
-        <div className="printtool-sticker-settings__group">
-          <label className="printtool-sticker-settings__label" htmlFor="sticker-copies">
+        <div className="craft-sticker-settings__group">
+          <label className="craft-sticker-settings__label" htmlFor="sticker-copies">
             Copies per image
           </label>
           <input
@@ -68,15 +68,15 @@ export function StickerSettings({
             onChange={e =>
               onSettingsChange({ copies: Math.max(1, parseInt(e.target.value, 10) || 1) })
             }
-            className="printtool-sticker-settings__input"
+            className="craft-sticker-settings__input"
           />
         </div>
 
-        <div className="printtool-sticker-settings__group">
-          <span className="printtool-sticker-settings__label">Cutline Offset</span>
-          <div className="printtool-sticker-settings__radio-group">
+        <div className="craft-sticker-settings__group">
+          <span className="craft-sticker-settings__label">Cutline Offset</span>
+          <div className="craft-sticker-settings__radio-group">
             {([1, 2, 3, 4] as StickerOffsetSize[]).map(size => (
-              <label key={size} className="printtool-sticker-settings__radio">
+              <label key={size} className="craft-sticker-settings__radio">
                 <input
                   type="radio"
                   name="sticker-size"
@@ -91,8 +91,8 @@ export function StickerSettings({
           </div>
         </div>
 
-        <div className="printtool-sticker-settings__group">
-          <label className="printtool-sticker-settings__label" htmlFor="sticker-custom-offset">
+        <div className="craft-sticker-settings__group">
+          <label className="craft-sticker-settings__label" htmlFor="sticker-custom-offset">
             Custom offset (inches, overrides preset)
           </label>
           <input
@@ -107,11 +107,11 @@ export function StickerSettings({
               onSettingsChange({ customOffsetInches: v === '' ? null : parseFloat(v) })
             }}
             placeholder="(unused)"
-            className="printtool-sticker-settings__input"
+            className="craft-sticker-settings__input"
           />
         </div>
 
-        <label className="printtool-sticker-settings__checkbox">
+        <label className="craft-sticker-settings__checkbox">
           <input
             type="checkbox"
             checked={settings.testMode}

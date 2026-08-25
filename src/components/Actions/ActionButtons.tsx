@@ -1,6 +1,6 @@
 /**
  * ActionButtons Component
- * Process and Download buttons for the Print Tool
+ * Process and Download buttons for the print modes
  */
 
 import { useState } from 'react'
@@ -12,7 +12,7 @@ import {
   canvasToBase64,
   downloadBase64File,
   dataUrlToBase64
-} from '../../api/printToolApi'
+} from '../../api/craftApi'
 
 interface ActionButtonsProps {
   mode: PrintMode
@@ -122,17 +122,17 @@ export function ActionButtons({
   }
 
   return (
-    <div className="printtool-actions">
-      <div className="printtool-actions__process">
+    <div className="craft-actions">
+      <div className="craft-actions__process">
         <button
           type="button"
-          className="printtool-actions__button printtool-actions__button--primary"
+          className="craft-actions__button craft-actions__button--primary"
           onClick={onProcessClick}
           disabled={!canProcess || showProcessing}
         >
           {showProcessing ? (
             <>
-              <span className="printtool-actions__spinner" />
+              <span className="craft-actions__spinner" />
               Processing...
             </>
           ) : (
@@ -142,15 +142,15 @@ export function ActionButtons({
       </div>
 
       {result && result.sheets && result.sheets.length > 1 && (
-        <div className="printtool-actions__downloads">
-          <div className="printtool-actions__download-group">
-            <span className="printtool-actions__download-label">
+        <div className="craft-actions__downloads">
+          <div className="craft-actions__download-group">
+            <span className="craft-actions__download-label">
               All {result.sheets.length} Sheets
             </span>
-            <div className="printtool-actions__download-buttons">
+            <div className="craft-actions__download-buttons">
               <button
                 type="button"
-                className="printtool-actions__button printtool-actions__button--secondary"
+                className="craft-actions__button craft-actions__button--secondary"
                 onClick={() => {
                   void handleDownloadAllSheets('png')
                 }}
@@ -160,7 +160,7 @@ export function ActionButtons({
               </button>
               <button
                 type="button"
-                className="printtool-actions__button printtool-actions__button--secondary"
+                className="craft-actions__button craft-actions__button--secondary"
                 onClick={() => {
                   void handleDownloadAllSheets('tiff')
                 }}
@@ -174,15 +174,15 @@ export function ActionButtons({
       )}
 
       {result && (
-        <div className="printtool-actions__downloads">
-          <div className="printtool-actions__download-group">
-            <span className="printtool-actions__download-label">
+        <div className="craft-actions__downloads">
+          <div className="craft-actions__download-group">
+            <span className="craft-actions__download-label">
               {isDuplex ? 'Front Sheet' : 'Download'}
             </span>
-            <div className="printtool-actions__download-buttons">
+            <div className="craft-actions__download-buttons">
               <button
                 type="button"
-                className="printtool-actions__button printtool-actions__button--secondary"
+                className="craft-actions__button craft-actions__button--secondary"
                 onClick={() => handleDownloadPng(result.frontCanvas, isDuplex ? '-front' : '')}
                 disabled={isExporting}
               >
@@ -190,7 +190,7 @@ export function ActionButtons({
               </button>
               <button
                 type="button"
-                className="printtool-actions__button printtool-actions__button--secondary"
+                className="craft-actions__button craft-actions__button--secondary"
                 onClick={() => onTiffDownloadClick(result.frontCanvas, isDuplex ? '-front' : '')}
                 disabled={isExporting}
               >
@@ -200,12 +200,12 @@ export function ActionButtons({
           </div>
 
           {isDuplex && result.backCanvas && (
-            <div className="printtool-actions__download-group">
-              <span className="printtool-actions__download-label">Back Sheet</span>
-              <div className="printtool-actions__download-buttons">
+            <div className="craft-actions__download-group">
+              <span className="craft-actions__download-label">Back Sheet</span>
+              <div className="craft-actions__download-buttons">
                 <button
                   type="button"
-                  className="printtool-actions__button printtool-actions__button--secondary"
+                  className="craft-actions__button craft-actions__button--secondary"
                   onClick={() => handleDownloadPng(result.backCanvas!, '-back')}
                   disabled={isExporting}
                 >
@@ -213,7 +213,7 @@ export function ActionButtons({
                 </button>
                 <button
                   type="button"
-                  className="printtool-actions__button printtool-actions__button--secondary"
+                  className="craft-actions__button craft-actions__button--secondary"
                   onClick={() => onTiffDownloadClick(result.backCanvas!, '-back')}
                   disabled={isExporting}
                 >

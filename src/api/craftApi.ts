@@ -1,5 +1,5 @@
 /**
- * Print Tool API
+ * Craft API
  * Backend API calls for ImageMagick processing and TIFF export.
  */
 
@@ -13,7 +13,7 @@ import type {
 } from '../domain/types'
 
 // API base URL - matches edge-router pattern /<service>/api
-const API_BASE_URL = '/printtool/api'
+const API_BASE_URL = '/craft/api'
 
 /**
  * Convert a canvas to base64 PNG data
@@ -57,7 +57,7 @@ export function downloadBase64File(base64: string, filename: string, mimeType: s
 export function downloadCanvasAsPng(canvas: HTMLCanvasElement, filename: string): void {
   canvas.toBlob(blob => {
     if (!blob) {
-      logger.error('[printToolApi] Failed to create blob from canvas')
+      logger.error('[craftApi] Failed to create blob from canvas')
       return
     }
     const url = URL.createObjectURL(blob)
@@ -96,7 +96,7 @@ export async function generateCalibrationSheet(
   variations: Variation[],
   onProgress?: (progress: CalibrationProgress) => void
 ): Promise<CalibrationResponse> {
-  logger.info('[printToolApi] Generating calibration sheet', {
+  logger.info('[craftApi] Generating calibration sheet', {
     paperSize,
     grid,
     dpi,
@@ -184,11 +184,11 @@ export async function generateCalibrationSheet(
       throw new Error('No result received from server')
     }
 
-    logger.info('[printToolApi] Calibration sheet generated successfully')
+    logger.info('[craftApi] Calibration sheet generated successfully')
     return result
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error'
-    logger.error('[printToolApi] Failed to generate calibration sheet', { error: message })
+    logger.error('[craftApi] Failed to generate calibration sheet', { error: message })
     return {
       success: false,
       error: message
@@ -203,7 +203,7 @@ export async function generateCalibrationSheet(
  * @param dpi - DPI to embed in TIFF metadata
  */
 export async function exportToTiff(imageBase64: string, dpi: number): Promise<ExportResponse> {
-  logger.info('[printToolApi] Exporting to TIFF', { dpi })
+  logger.info('[craftApi] Exporting to TIFF', { dpi })
 
   const request: ExportRequest = {
     image: imageBase64,
@@ -230,11 +230,11 @@ export async function exportToTiff(imageBase64: string, dpi: number): Promise<Ex
       throw new Error(data.error || 'Unknown error exporting to TIFF')
     }
 
-    logger.info('[printToolApi] TIFF export successful')
+    logger.info('[craftApi] TIFF export successful')
     return data
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error'
-    logger.error('[printToolApi] Failed to export to TIFF', { error: message })
+    logger.error('[craftApi] Failed to export to TIFF', { error: message })
     return {
       success: false,
       error: message
@@ -274,7 +274,7 @@ export interface StickerApiResponse {
  * Requires the local server + Python (rembg, scipy, Pillow) to be available.
  */
 export async function processSticker(req: StickerApiRequest): Promise<StickerApiResponse> {
-  logger.info('[printToolApi] Processing sticker batch', {
+  logger.info('[craftApi] Processing sticker batch', {
     count: req.images.length,
     copies: req.copies,
     size: req.size,
@@ -297,14 +297,14 @@ export async function processSticker(req: StickerApiRequest): Promise<StickerApi
       throw new Error(data.error || 'Sticker processing failed')
     }
 
-    logger.info('[printToolApi] Sticker processing successful', {
+    logger.info('[craftApi] Sticker processing successful', {
       filename: data.data?.filename,
       sizeBytes: data.data?.sizeBytes
     })
     return data
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error'
-    logger.error('[printToolApi] Sticker processing failed', { error: message })
+    logger.error('[craftApi] Sticker processing failed', { error: message })
     return { success: false, error: message }
   }
 }

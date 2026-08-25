@@ -21,8 +21,8 @@
       "Bash(pnpm add:*)",
       "Bash(cat:*)",
       "Bash(npm run build:*)",
-      "Bash(curl -sL -o /dev/null -w \"GET /printtool/: %{http_code}\\\\n\" https://hadoku.me/printtool/)",
-      "Bash(curl -s https://hadoku.me/printtool/)",
+      "Bash(curl -sL -o /dev/null -w \"GET /craft/: %{http_code}\\\\n\" https://hadoku.me/craft/)",
+      "Bash(curl -s https://hadoku.me/craft/)",
       "Bash(awk ' *)"
     ]
   }

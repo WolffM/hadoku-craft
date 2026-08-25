@@ -54,7 +54,7 @@ interface ExportOptions {
  */
 async function createTempDir(): Promise<string> {
   const id = randomBytes(8).toString('hex')
-  const dir = join(tmpdir(), `printtool-${id}`)
+  const dir = join(tmpdir(), `craft-${id}`)
   await mkdir(dir, { recursive: true })
   return dir
 }

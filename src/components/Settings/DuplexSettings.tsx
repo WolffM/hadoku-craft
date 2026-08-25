@@ -28,7 +28,7 @@ export function DuplexSettings({
     frontImageOrientation && backImageOrientation && frontImageOrientation !== backImageOrientation
 
   return (
-    <SettingsPanel className="printtool-duplex-settings">
+    <SettingsPanel className="craft-duplex-settings">
       <SettingsSection
         title="Back Image"
         description="Upload the image for the back side of the postcards"
@@ -41,8 +41,8 @@ export function DuplexSettings({
         />
 
         {orientationMismatch && (
-          <div className="printtool-duplex-settings__warning">
-            <span className="printtool-duplex-settings__warning-icon">⟳</span>
+          <div className="craft-duplex-settings__warning">
+            <span className="craft-duplex-settings__warning-icon">⟳</span>
             <span>
               Back image will be auto-rotated to match front image orientation (
               {frontImageOrientation})

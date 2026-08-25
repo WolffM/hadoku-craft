@@ -111,12 +111,12 @@ export function ImageUpload({
   )
 
   const containerClass = compact
-    ? 'printtool-image-upload printtool-image-upload--compact'
-    : 'printtool-image-upload'
+    ? 'craft-image-upload craft-image-upload--compact'
+    : 'craft-image-upload'
 
   return (
     <div className={containerClass}>
-      {!compact && <div className="printtool-image-upload__label">{label}</div>}
+      {!compact && <div className="craft-image-upload__label">{label}</div>}
 
       {image ? (
         <ImagePreview
@@ -127,10 +127,10 @@ export function ImageUpload({
         />
       ) : (
         <div
-          className={`printtool-image-upload__dropzone ${
-            isDragOver ? 'printtool-image-upload__dropzone--active' : ''
-          } ${error ? 'printtool-image-upload__dropzone--error' : ''} ${
-            compact ? 'printtool-image-upload__dropzone--compact' : ''
+          className={`craft-image-upload__dropzone ${
+            isDragOver ? 'craft-image-upload__dropzone--active' : ''
+          } ${error ? 'craft-image-upload__dropzone--error' : ''} ${
+            compact ? 'craft-image-upload__dropzone--compact' : ''
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
@@ -142,10 +142,10 @@ export function ImageUpload({
           aria-label={`${label}: Click or drop an image`}
         >
           {isLoading ? (
-            <div className="printtool-image-upload__loading">Loading...</div>
+            <div className="craft-image-upload__loading">Loading...</div>
           ) : (
             <>
-              <div className="printtool-image-upload__icon">
+              <div className="craft-image-upload__icon">
                 <svg
                   width={compact ? '32' : '48'}
                   height={compact ? '32' : '48'}
@@ -159,25 +159,25 @@ export function ImageUpload({
                   <path d="M21 15l-5-5L5 21" />
                 </svg>
               </div>
-              <div className="printtool-image-upload__text">
+              <div className="craft-image-upload__text">
                 {compact ? label : 'Drop image here or click to select'}
               </div>
               {!compact && (
-                <div className="printtool-image-upload__hint">PNG, JPG, TIFF, WebP, BMP</div>
+                <div className="craft-image-upload__hint">PNG, JPG, TIFF, WebP, BMP</div>
               )}
             </>
           )}
         </div>
       )}
 
-      {error && <div className="printtool-image-upload__error">{error}</div>}
+      {error && <div className="craft-image-upload__error">{error}</div>}
 
       <input
         ref={inputRef}
         type="file"
         accept={ACCEPTED_EXTENSIONS}
         onChange={handleInputChange}
-        className="printtool-image-upload__input"
+        className="craft-image-upload__input"
         aria-hidden="true"
       />
     </div>

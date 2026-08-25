@@ -1,12 +1,12 @@
 {
-  "name": "@wolffm/hadoku-printtool",
+  "name": "@wolffm/hadoku-craft",
   "version": "2.0.8",
-  "description": "Image manipulation tool for cropping, resizing, and collating images for print",
+  "description": "Print-prep and color-palette toolkit: crop, resize, collate images for print, and extract palettes from images",
   "type": "module",
   "packageManager": "pnpm@11.5.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WolffM/hadoku-printTool.git"
+    "url": "git+https://github.com/WolffM/hadoku-craft.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -39,9 +39,9 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "prepare": "git config core.hooksPath .husky 2>/dev/null || true",
     "local:start": "pm2 start ecosystem.config.cjs",
-    "local:stop": "pm2 stop printtool-server",
-    "local:restart": "pm2 restart printtool-server",
-    "local:logs": "pm2 logs printtool-server",
+    "local:stop": "pm2 stop craft-server",
+    "local:restart": "pm2 restart craft-server",
+    "local:logs": "pm2 logs craft-server",
     "local:status": "pm2 status"
   },
   "peerDependencies": {

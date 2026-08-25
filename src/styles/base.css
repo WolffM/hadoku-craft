@@ -29,12 +29,12 @@
    wrong mode. */
 
 /* Dark Reader detection helper */
-.printtool-container[data-dark-theme='true'] {
+.craft-container[data-dark-theme='true'] {
   --is-dark-theme: 1;
 }
 
 /* Main container */
-.printtool-container {
+.craft-container {
   min-height: 100vh;
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -43,24 +43,24 @@
     color 0.3s ease;
 }
 
-.printtool {
+.craft {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
 
 /* Header now comes from the shared <AppHeader> (@wolffm/task-ui-components,
- * app-header.css). The former .printtool__header / __header-actions rules were
+ * app-header.css). The former .craft__header / __header-actions rules were
  * removed when this app adopted the unified header. */
 
-.printtool__content {
+.craft__content {
   padding: 1rem;
   background-color: var(--color-bg-card);
   border-radius: var(--hdk-radius);
   box-shadow: var(--hdk-shadow-sm);
 }
 
-.printtool__content p {
+.craft__content p {
   margin: 0.5rem 0;
   color: var(--color-text-secondary);
   font-size: var(--hdk-text-base);
@@ -68,7 +68,7 @@
 }
 
 /* Layout */
-.printtool__layout {
+.craft__layout {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 1.5rem;
@@ -76,24 +76,24 @@
 }
 
 @media (max-width: 768px) {
-  .printtool__layout {
+  .craft__layout {
     grid-template-columns: 1fr;
   }
 }
 
-.printtool__sidebar {
+.craft__sidebar {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.printtool__main {
+.craft__main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.printtool__error {
+.craft__error {
   padding: 0.75rem 1rem;
   background-color: var(--color-danger-bg);
   border: 1px solid var(--color-danger);

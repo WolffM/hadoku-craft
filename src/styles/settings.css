@@ -6,7 +6,7 @@
  */
 
 /* SettingsPanel — shared card-style chrome for every mode's settings */
-.printtool-settings-panel {
+.craft-settings-panel {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -16,34 +16,34 @@
   border-radius: var(--hdk-radius);
 }
 
-.printtool-settings-panel__section {
+.craft-settings-panel__section {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.printtool-settings-panel__title {
+.craft-settings-panel__title {
   margin: 0;
   font-size: var(--hdk-text-sm);
   font-weight: var(--font-weight-semibold, 600);
   color: var(--color-text);
 }
 
-.printtool-settings-panel__description {
+.craft-settings-panel__description {
   margin: 0;
   font-size: var(--hdk-text-sm);
   color: var(--color-text-secondary);
 }
 
-.printtool-settings-panel__description code,
-.printtool-settings-panel__info code {
+.craft-settings-panel__description code,
+.craft-settings-panel__info code {
   padding: 0 0.25rem;
   font-size: 0.85em;
   background-color: var(--color-bg-alt);
   border-radius: 3px;
 }
 
-.printtool-settings-panel__info {
+.craft-settings-panel__info {
   padding: 0.5rem 0.75rem;
   background-color: var(--color-bg-alt);
   border-radius: calc(var(--hdk-radius) - 2px);
@@ -51,31 +51,31 @@
   color: var(--color-text-secondary);
 }
 
-.printtool-settings-panel__info p {
+.craft-settings-panel__info p {
   margin: 0;
 }
 
-/* Form-field utility classes (.printtool-settings__*) used by every panel */
-.printtool-settings__group {
+/* Form-field utility classes (.craft-settings__*) used by every panel */
+.craft-settings__group {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.printtool-settings__group--nested {
+.craft-settings__group--nested {
   margin-left: 1.5rem;
   padding-left: 1rem;
   border-left: 2px solid var(--color-border);
 }
 
-.printtool-settings__label {
+.craft-settings__label {
   font-size: var(--hdk-text-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text);
 }
 
-.printtool-settings__select,
-.printtool-settings__input {
+.craft-settings__select,
+.craft-settings__input {
   box-sizing: border-box;
   width: 100%;
   padding: 0.5rem 0.75rem;
@@ -87,19 +87,19 @@
   transition: border-color 0.2s ease;
 }
 
-.printtool-settings__select:focus,
-.printtool-settings__input:focus {
+.craft-settings__select:focus,
+.craft-settings__input:focus {
   outline: none;
   border-color: var(--color-primary);
 }
 
-.printtool-settings__select:disabled,
-.printtool-settings__input:disabled {
+.craft-settings__select:disabled,
+.craft-settings__input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.printtool-settings__hint {
+.craft-settings__hint {
   margin: 0.25rem 0 0 0;
   font-size: var(--hdk-text-xs);
   color: var(--color-text-secondary);
@@ -107,7 +107,7 @@
   line-height: 1.4;
 }
 
-.printtool-settings__slider {
+.craft-settings__slider {
   width: 100%;
   height: 6px;
   -webkit-appearance: none;
@@ -117,7 +117,7 @@
   outline: none;
 }
 
-.printtool-settings__slider::-webkit-slider-thumb {
+.craft-settings__slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 16px;
@@ -127,7 +127,7 @@
   cursor: pointer;
 }
 
-.printtool-settings__slider::-moz-range-thumb {
+.craft-settings__slider::-moz-range-thumb {
   width: 16px;
   height: 16px;
   background-color: var(--color-primary);
@@ -136,14 +136,14 @@
   cursor: pointer;
 }
 
-.printtool-settings__slider-labels {
+.craft-settings__slider-labels {
   display: flex;
   justify-content: space-between;
   font-size: var(--hdk-text-xs);
   color: var(--color-text-secondary);
 }
 
-.printtool-settings__checkbox {
+.craft-settings__checkbox {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -152,20 +152,20 @@
   color: var(--color-text);
 }
 
-.printtool-settings__checkbox input[type='checkbox'] {
+.craft-settings__checkbox input[type='checkbox'] {
   width: 16px;
   height: 16px;
   accent-color: var(--color-primary);
   cursor: pointer;
 }
 
-.printtool-settings__layout-info {
+.craft-settings__layout-info {
   padding: 0.75rem;
   background-color: var(--color-primary-bg);
   border-radius: calc(var(--hdk-radius) - 2px);
 }
 
-.printtool-settings__layout-label {
+.craft-settings__layout-label {
   font-size: var(--hdk-text-xs);
   font-weight: var(--font-weight-semibold);
   color: var(--color-on-primary-bg);
@@ -173,14 +173,14 @@
   letter-spacing: 0.05em;
 }
 
-.printtool-settings__layout-value {
+.craft-settings__layout-value {
   font-size: var(--hdk-text-sm);
   font-weight: var(--font-weight-semibold, 600);
   color: var(--color-text);
   margin-top: 0.25rem;
 }
 
-.printtool-settings__layout-error {
+.craft-settings__layout-error {
   padding: 0.75rem;
   background-color: var(--color-danger-bg);
   border-radius: calc(var(--hdk-radius) - 2px);
@@ -189,7 +189,7 @@
 }
 
 /* Duplex Settings — only the orientation-mismatch warning is mode-specific */
-.printtool-duplex-settings__warning {
+.craft-duplex-settings__warning {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -200,24 +200,24 @@
   color: var(--color-on-warning-bg);
 }
 
-.printtool-duplex-settings__warning-icon {
+.craft-duplex-settings__warning-icon {
   font-size: 1.25rem;
 }
 
 /* TCG Settings — game dropdown, mode tabs, deck-list textarea, hint */
-.printtool-tcg-settings__group {
+.craft-tcg-settings__group {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.printtool-tcg-settings__label {
+.craft-tcg-settings__label {
   font-size: var(--hdk-text-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text);
 }
 
-.printtool-tcg-settings__select {
+.craft-tcg-settings__select {
   box-sizing: border-box;
   width: 100%;
   padding: 0.4rem 0.6rem;
@@ -228,7 +228,7 @@
   font-size: var(--hdk-text-sm);
 }
 
-.printtool-tcg-settings__tabs {
+.craft-tcg-settings__tabs {
   display: flex;
   gap: 0.25rem;
   padding: 0.25rem;
@@ -236,7 +236,7 @@
   border-radius: calc(var(--hdk-radius) - 2px);
 }
 
-.printtool-tcg-settings__tab {
+.craft-tcg-settings__tab {
   flex: 1;
   padding: 0.5rem 0.75rem;
   border: none;
@@ -248,17 +248,17 @@
   transition: background-color 0.15s ease;
 }
 
-.printtool-tcg-settings__tab:hover {
+.craft-tcg-settings__tab:hover {
   background-color: var(--color-bg-card);
 }
 
-.printtool-tcg-settings__tab--active {
+.craft-tcg-settings__tab--active {
   background-color: var(--color-bg-card);
   color: var(--color-text);
   font-weight: var(--font-weight-semibold, 600);
 }
 
-.printtool-tcg-settings__textarea {
+.craft-tcg-settings__textarea {
   box-sizing: border-box;
   width: 100%;
   min-height: 200px;
@@ -272,17 +272,17 @@
   resize: vertical;
 }
 
-.printtool-tcg-settings__textarea:focus {
+.craft-tcg-settings__textarea:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: -2px;
 }
 
-.printtool-tcg-settings__hint {
+.craft-tcg-settings__hint {
   font-size: var(--hdk-text-xs);
   color: var(--color-text-secondary);
 }
 
-.printtool-tcg-settings__editor-launch {
+.craft-tcg-settings__editor-launch {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -291,13 +291,13 @@
   border-top: 1px dashed var(--color-border);
 }
 
-.printtool-tcg-settings__editor-hint {
+.craft-tcg-settings__editor-hint {
   margin: 0;
   font-size: var(--hdk-text-xs);
   color: var(--color-text-secondary);
 }
 
-.printtool-tcg-settings__editor-message {
+.craft-tcg-settings__editor-message {
   margin: 0;
   padding: 0.4rem 0.6rem;
   background-color: var(--color-bg-alt);
@@ -307,19 +307,19 @@
 }
 
 /* Sticker Settings — copies/offset/radio/checkbox controls */
-.printtool-sticker-settings__group {
+.craft-sticker-settings__group {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.printtool-sticker-settings__label {
+.craft-sticker-settings__label {
   font-size: var(--hdk-text-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text);
 }
 
-.printtool-sticker-settings__input {
+.craft-sticker-settings__input {
   box-sizing: border-box;
   width: 100%;
   padding: 0.4rem 0.6rem;
@@ -330,13 +330,13 @@
   font-size: var(--hdk-text-sm);
 }
 
-.printtool-sticker-settings__radio-group {
+.craft-sticker-settings__radio-group {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.printtool-sticker-settings__radio {
+.craft-sticker-settings__radio {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -345,7 +345,7 @@
   cursor: pointer;
 }
 
-.printtool-sticker-settings__checkbox {
+.craft-sticker-settings__checkbox {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -355,19 +355,19 @@
 }
 
 /* Calibration Settings — grid of variation previews */
-.printtool-calibration-settings__group {
+.craft-calibration-settings__group {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.printtool-calibration-settings__label {
+.craft-calibration-settings__label {
   font-size: var(--hdk-text-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text);
 }
 
-.printtool-calibration-settings__select {
+.craft-calibration-settings__select {
   box-sizing: border-box;
   width: 100%;
   padding: 0.5rem 0.75rem;
@@ -378,25 +378,25 @@
   font-size: var(--hdk-text-sm);
 }
 
-.printtool-calibration-settings__variations {
+.craft-calibration-settings__variations {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.printtool-calibration-settings__variations-label {
+.craft-calibration-settings__variations-label {
   font-size: var(--hdk-text-xs);
   color: var(--color-text-secondary);
 }
 
-.printtool-calibration-settings__variations-grid {
+.craft-calibration-settings__variations-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
   max-width: 100%;
 }
 
-.printtool-calibration-settings__variation {
+.craft-calibration-settings__variation {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -410,34 +410,34 @@
   overflow: hidden;
 }
 
-.printtool-calibration-settings__variation:hover {
+.craft-calibration-settings__variation:hover {
   border-color: var(--color-primary);
 }
 
-.printtool-calibration-settings__variation--selected {
+.craft-calibration-settings__variation--selected {
   border-color: var(--color-primary);
   background-color: var(--color-primary-bg);
 }
 
-.printtool-calibration-settings__variation-preview {
+.craft-calibration-settings__variation-preview {
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: 2px;
 }
 
-.printtool-calibration-settings__variation-preview img {
+.craft-calibration-settings__variation-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.printtool-calibration-settings__variation-placeholder {
+.craft-calibration-settings__variation-placeholder {
   aspect-ratio: 1;
   background-color: var(--color-bg-alt);
   border-radius: 2px;
 }
 
-.printtool-calibration-settings__variation-label {
+.craft-calibration-settings__variation-label {
   font-size: var(--hdk-text-xs);
   color: var(--color-text-secondary);
   text-align: center;
@@ -446,7 +446,7 @@
   white-space: nowrap;
 }
 
-.printtool-calibration-settings__selected-info {
+.craft-calibration-settings__selected-info {
   padding: 0.5rem 0.75rem;
   background-color: var(--color-bg-alt);
   border-radius: calc(var(--hdk-radius) - 2px);
@@ -454,7 +454,7 @@
   color: var(--color-text);
 }
 
-.printtool-calibration-settings__args {
+.craft-calibration-settings__args {
   margin-top: 0.25rem;
   font-family: monospace;
   font-size: var(--hdk-text-xs);
@@ -463,19 +463,19 @@
 }
 
 /* Collage Settings — crop anchor grid */
-.printtool-crop-anchor-grid {
+.craft-crop-anchor-grid {
   display: flex;
   flex-direction: column;
   gap: 4px;
   width: fit-content;
 }
 
-.printtool-crop-anchor-grid__row {
+.craft-crop-anchor-grid__row {
   display: flex;
   gap: 4px;
 }
 
-.printtool-crop-anchor-grid__button {
+.craft-crop-anchor-grid__button {
   width: 28px;
   height: 28px;
   display: flex;
@@ -489,20 +489,20 @@
   transition: all 0.2s ease;
 }
 
-.printtool-crop-anchor-grid__button:hover {
+.craft-crop-anchor-grid__button:hover {
   background-color: var(--color-bg-hover);
 }
 
-.printtool-crop-anchor-grid__button--active {
+.craft-crop-anchor-grid__button--active {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
 
-.printtool-crop-anchor-grid__button--active .printtool-crop-anchor-grid__dot {
+.craft-crop-anchor-grid__button--active .craft-crop-anchor-grid__dot {
   background-color: var(--color-text-on-primary);
 }
 
-.printtool-crop-anchor-grid__dot {
+.craft-crop-anchor-grid__dot {
   width: 8px;
   height: 8px;
   background-color: var(--color-text-secondary);

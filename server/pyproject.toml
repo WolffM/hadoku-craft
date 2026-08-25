@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "hadoku-printtool-server"
+name = "hadoku-craft-server"
 version = "0.1.0"
-description = "Python sidecar pipelines for hadoku-printTool local server (sticker bg-removal + cutlines)"
+description = "Python sidecar pipelines for hadoku-craft local server (sticker bg-removal + cutlines)"
 requires-python = ">=3.11"
 dependencies = [
     "Pillow>=9.0",

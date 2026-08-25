@@ -16,14 +16,14 @@ interface ModeSelectorProps {
 
 export function ModeSelector({ mode, onModeChange }: ModeSelectorProps) {
   return (
-    <div className="printtool-mode-selector" role="tablist">
+    <div className="craft-mode-selector" role="tablist">
       {MODES.map(({ id, label }) => (
         <button
           key={id}
           role="tab"
           type="button"
-          className={`printtool-mode-selector__button ${
-            mode === id ? 'printtool-mode-selector__button--active' : ''
+          className={`craft-mode-selector__button ${
+            mode === id ? 'craft-mode-selector__button--active' : ''
           }`}
           aria-selected={mode === id}
           onClick={() => onModeChange(id)}

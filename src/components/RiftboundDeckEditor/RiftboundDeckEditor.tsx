@@ -18,7 +18,7 @@ import { logger } from '@wolffm/logger/client'
 import type { RiftboundDeck } from '../../domain/types'
 import { createTcgSheets, getSource, type FetchedCard } from '../../domain/processing/tcg'
 import { loadImage } from '../../domain/processing/canvasUtils'
-import { downloadCanvasAsPng } from '../../api/printToolApi'
+import { downloadCanvasAsPng } from '../../api/craftApi'
 import cardbackUrl from '../../assets/cardback.webp?inline'
 
 interface Props {
@@ -108,9 +108,9 @@ export function RiftboundDeckEditor({ deck, cutlines, onSlotVariantChange, onClo
 
   if (deck.slots.length === 0) {
     return (
-      <div className="printtool-riftbound-editor printtool-riftbound-editor--empty">
+      <div className="craft-riftbound-editor craft-riftbound-editor--empty">
         <p>No cards resolved from the deck list.</p>
-        <button type="button" className="printtool-riftbound-editor__button" onClick={onClose}>
+        <button type="button" className="craft-riftbound-editor__button" onClick={onClose}>
           Back to deck list
         </button>
       </div>
@@ -118,19 +118,19 @@ export function RiftboundDeckEditor({ deck, cutlines, onSlotVariantChange, onClo
   }
 
   return (
-    <div className="printtool-riftbound-editor">
-      <header className="printtool-riftbound-editor__header">
+    <div className="craft-riftbound-editor">
+      <header className="craft-riftbound-editor__header">
         <div>
-          <h3 className="printtool-riftbound-editor__title">Riftbound Deck Editor</h3>
-          <p className="printtool-riftbound-editor__subtitle">
+          <h3 className="craft-riftbound-editor__title">Riftbound Deck Editor</h3>
+          <p className="craft-riftbound-editor__subtitle">
             {deck.slots.length} card{deck.slots.length === 1 ? '' : 's'} · Sheet {pageIndex + 1} of{' '}
             {totalPages}
           </p>
         </div>
-        <div className="printtool-riftbound-editor__header-actions">
+        <div className="craft-riftbound-editor__header-actions">
           <button
             type="button"
-            className="printtool-riftbound-editor__button printtool-riftbound-editor__button--ghost"
+            className="craft-riftbound-editor__button craft-riftbound-editor__button--ghost"
             onClick={onClose}
             disabled={isSaving}
           >
@@ -138,7 +138,7 @@ export function RiftboundDeckEditor({ deck, cutlines, onSlotVariantChange, onClo
           </button>
           <button
             type="button"
-            className="printtool-riftbound-editor__button printtool-riftbound-editor__button--primary"
+            className="craft-riftbound-editor__button craft-riftbound-editor__button--primary"
             onClick={() => {
               void handleSave()
             }}
@@ -153,17 +153,17 @@ export function RiftboundDeckEditor({ deck, cutlines, onSlotVariantChange, onClo
         </div>
       </header>
 
-      {saveError && <div className="printtool-riftbound-editor__error">{saveError}</div>}
+      {saveError && <div className="craft-riftbound-editor__error">{saveError}</div>}
 
-      <div className="printtool-riftbound-editor__grid">
+      <div className="craft-riftbound-editor__grid">
         {pageSlots.map((slot, localIdx) => {
           const slotIndex = pageStart + localIdx
           const dataUrl = deck.variantImages[slot.selectedId]
           const hasVariants = slot.variants.length > 1
           return (
-            <div key={slotIndex} className="printtool-riftbound-editor__slot">
+            <div key={slotIndex} className="craft-riftbound-editor__slot">
               <select
-                className="printtool-riftbound-editor__select"
+                className="craft-riftbound-editor__select"
                 value={slot.selectedId}
                 onChange={e => onSlotVariantChange(slotIndex, e.target.value)}
                 disabled={!hasVariants || isSaving}
@@ -176,18 +176,18 @@ export function RiftboundDeckEditor({ deck, cutlines, onSlotVariantChange, onClo
                   </option>
                 ))}
               </select>
-              <div className="printtool-riftbound-editor__thumb">
+              <div className="craft-riftbound-editor__thumb">
                 {dataUrl ? (
                   <img src={dataUrl} alt={slot.name || slot.selectedId} loading="lazy" />
                 ) : (
-                  <div className="printtool-riftbound-editor__thumb-missing">
+                  <div className="craft-riftbound-editor__thumb-missing">
                     {slot.selectedId}
                     <br />
                     (not found)
                   </div>
                 )}
               </div>
-              <div className="printtool-riftbound-editor__caption" title={slot.raw}>
+              <div className="craft-riftbound-editor__caption" title={slot.raw}>
                 {slot.name || slot.selectedId}
               </div>
             </div>
@@ -196,21 +196,21 @@ export function RiftboundDeckEditor({ deck, cutlines, onSlotVariantChange, onClo
       </div>
 
       {totalPages > 1 && (
-        <nav className="printtool-riftbound-editor__pager">
+        <nav className="craft-riftbound-editor__pager">
           <button
             type="button"
-            className="printtool-riftbound-editor__button"
+            className="craft-riftbound-editor__button"
             onClick={() => setPageIndex(Math.max(0, pageIndex - 1))}
             disabled={pageIndex === 0 || isSaving}
           >
             ‹ Previous sheet
           </button>
-          <span className="printtool-riftbound-editor__pager-label">
+          <span className="craft-riftbound-editor__pager-label">
             Sheet {pageIndex + 1} / {totalPages}
           </span>
           <button
             type="button"
-            className="printtool-riftbound-editor__button"
+            className="craft-riftbound-editor__button"
             onClick={() => setPageIndex(Math.min(totalPages - 1, pageIndex + 1))}
             disabled={pageIndex === totalPages - 1 || isSaving}
           >

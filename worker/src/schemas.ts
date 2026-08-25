@@ -9,7 +9,7 @@ export const HealthResponseSchema = z.object({
   success: z.literal(true),
   data: z.object({
     status: z.literal('healthy'),
-    service: z.literal('printtool-api'),
+    service: z.literal('craft-api'),
     timestamp: z.string(),
     note: z.string().optional()
   })

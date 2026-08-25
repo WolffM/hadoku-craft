@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/printtool/api': {
+      '/craft/api': {
         target: 'http://localhost:8787',
         changeOrigin: true
       }

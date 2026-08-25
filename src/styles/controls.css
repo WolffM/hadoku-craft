@@ -4,7 +4,7 @@
  */
 
 /* Mode Selector */
-.printtool-mode-selector {
+.craft-mode-selector {
   display: flex;
   gap: 0.25rem;
   padding: 0.25rem;
@@ -12,7 +12,7 @@
   border-radius: var(--hdk-radius);
 }
 
-.printtool-mode-selector__button {
+.craft-mode-selector__button {
   flex: 1;
   padding: 0.75rem 1rem;
   border: none;
@@ -25,19 +25,19 @@
   transition: all 0.2s ease;
 }
 
-.printtool-mode-selector__button:hover {
+.craft-mode-selector__button:hover {
   background-color: var(--color-bg-hover);
   color: var(--color-text);
 }
 
-.printtool-mode-selector__button--active {
+.craft-mode-selector__button--active {
   background-color: var(--color-primary);
   color: var(--color-text-on-primary);
   box-shadow: var(--hdk-shadow-sm);
 }
 
 /* Action Buttons */
-.printtool-actions {
+.craft-actions {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -47,12 +47,12 @@
   border-radius: var(--hdk-radius);
 }
 
-.printtool-actions__process {
+.craft-actions__process {
   display: flex;
   justify-content: center;
 }
 
-.printtool-actions__button {
+.craft-actions__button {
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: var(--hdk-radius);
@@ -65,67 +65,67 @@
   gap: 0.5rem;
 }
 
-.printtool-actions__button:disabled {
+.craft-actions__button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.printtool-actions__button--primary {
+.craft-actions__button--primary {
   background-color: var(--color-primary);
   color: var(--color-text-on-primary);
   min-width: 150px;
   justify-content: center;
 }
 
-.printtool-actions__button--primary:hover:not(:disabled) {
+.craft-actions__button--primary:hover:not(:disabled) {
   background-color: var(--color-primary-dark);
 }
 
-.printtool-actions__button--secondary {
+.craft-actions__button--secondary {
   background-color: var(--color-bg-alt);
   color: var(--color-text);
 }
 
-.printtool-actions__button--secondary:hover:not(:disabled) {
+.craft-actions__button--secondary:hover:not(:disabled) {
   background-color: var(--color-bg-hover);
 }
 
-.printtool-actions__downloads {
+.craft-actions__downloads {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
 }
 
-.printtool-actions__download-group {
+.craft-actions__download-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
 }
 
-.printtool-actions__download-label {
+.craft-actions__download-label {
   font-size: var(--hdk-text-xs);
   color: var(--color-text-secondary);
   font-weight: var(--font-weight-semibold);
 }
 
-.printtool-actions__download-buttons {
+.craft-actions__download-buttons {
   display: flex;
   gap: 0.5rem;
 }
 
-.printtool-actions__spinner {
+.craft-actions__spinner {
   width: 1rem;
   height: 1rem;
   border: 2px solid color-mix(in srgb, var(--color-text-on-primary) 30%, transparent);
   border-top-color: var(--color-text-on-primary);
   border-radius: 50%;
-  animation: printtool-spin 0.8s linear infinite;
+  animation: craft-spin 0.8s linear infinite;
 }
 
 /* API Status Indicator */
-.printtool-api-status {
+.craft-api-status {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -137,39 +137,39 @@
   transition: all 0.2s ease;
 }
 
-.printtool-api-status__indicator {
+.craft-api-status__indicator {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
   transition: background-color 0.2s ease;
 }
 
-.printtool-api-status--checking .printtool-api-status__indicator {
+.craft-api-status--checking .craft-api-status__indicator {
   background-color: var(--color-warning);
   animation: pulse 1.5s ease-in-out infinite;
 }
 
-.printtool-api-status--online .printtool-api-status__indicator {
+.craft-api-status--online .craft-api-status__indicator {
   background-color: var(--color-success);
 }
 
-.printtool-api-status--offline .printtool-api-status__indicator {
+.craft-api-status--offline .craft-api-status__indicator {
   background-color: var(--color-danger);
 }
 
-.printtool-api-status__text {
+.craft-api-status__text {
   color: var(--color-text-secondary);
 }
 
-.printtool-api-status--online .printtool-api-status__text {
+.craft-api-status--online .craft-api-status__text {
   color: var(--color-text);
 }
 
-.printtool-api-status--offline .printtool-api-status__text {
+.craft-api-status--offline .craft-api-status__text {
   color: var(--color-text);
 }
 
-.printtool-api-status__retry {
+.craft-api-status__retry {
   padding: 0.125rem 0.5rem;
   border: none;
   border-radius: 9999px;
@@ -180,7 +180,7 @@
   transition: background-color 0.2s ease;
 }
 
-.printtool-api-status__retry:hover {
+.craft-api-status__retry:hover {
   background-color: var(--color-danger-dark);
 }
 
@@ -195,7 +195,7 @@
 }
 
 /* Processing Overlay */
-.printtool-processing-overlay {
+.craft-processing-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -219,7 +219,7 @@
   }
 }
 
-.printtool-processing-overlay__content {
+.craft-processing-overlay__content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -232,50 +232,50 @@
   max-width: 400px;
 }
 
-.printtool-processing-overlay__spinner {
+.craft-processing-overlay__spinner {
   width: 48px;
   height: 48px;
   border: 4px solid var(--color-bg-alt);
   border-top-color: var(--color-primary);
   border-radius: 50%;
-  animation: printtool-spin 0.8s linear infinite;
+  animation: craft-spin 0.8s linear infinite;
 }
 
-.printtool-processing-overlay__title {
+.craft-processing-overlay__title {
   margin: 0;
   font-size: var(--hdk-text-lg);
   font-weight: var(--font-weight-semibold, 600);
   color: var(--color-text);
 }
 
-.printtool-processing-overlay__progress {
+.craft-processing-overlay__progress {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.printtool-processing-overlay__message {
+.craft-processing-overlay__message {
   font-size: var(--hdk-text-sm);
   color: var(--color-text-secondary);
   text-align: center;
 }
 
-.printtool-processing-overlay__bar {
+.craft-processing-overlay__bar {
   height: 8px;
   background-color: var(--color-bg-alt);
   border-radius: 9999px;
   overflow: hidden;
 }
 
-.printtool-processing-overlay__fill {
+.craft-processing-overlay__fill {
   height: 100%;
   background-color: var(--color-primary);
   border-radius: 9999px;
   transition: width 0.3s ease;
 }
 
-.printtool-processing-overlay__stats {
+.craft-processing-overlay__stats {
   font-size: var(--hdk-text-xs);
   color: var(--color-text-muted);
   text-align: center;

@@ -2,11 +2,11 @@
  * Shared settings-panel chrome.
  *
  * Every mode's settings component used to repeat the same outer markup:
- *   <div className="printtool-X-settings">
- *     <div className="printtool-X-settings__section">
- *       <h3 className="printtool-X-settings__title">…</h3>
- *       <p className="printtool-X-settings__description">…</p>
- *       <div className="printtool-X-settings__info">…</div>
+ *   <div className="craft-X-settings">
+ *     <div className="craft-X-settings__section">
+ *       <h3 className="craft-X-settings__title">…</h3>
+ *       <p className="craft-X-settings__description">…</p>
+ *       <div className="craft-X-settings__info">…</div>
  *     </div>
  *   </div>
  *
@@ -28,7 +28,7 @@ interface SettingsPanelProps {
  */
 export function SettingsPanel({ className, children }: SettingsPanelProps) {
   return (
-    <div className={`printtool-settings-panel${className ? ` ${className}` : ''}`}>{children}</div>
+    <div className={`craft-settings-panel${className ? ` ${className}` : ''}`}>{children}</div>
   )
 }
 
@@ -45,9 +45,9 @@ interface SettingsSectionProps {
  */
 export function SettingsSection({ title, description, children }: SettingsSectionProps) {
   return (
-    <div className="printtool-settings-panel__section">
-      <h3 className="printtool-settings-panel__title">{title}</h3>
-      {description && <p className="printtool-settings-panel__description">{description}</p>}
+    <div className="craft-settings-panel__section">
+      <h3 className="craft-settings-panel__title">{title}</h3>
+      {description && <p className="craft-settings-panel__description">{description}</p>}
       {children}
     </div>
   )
@@ -61,5 +61,5 @@ interface SettingsInfoProps {
  * Tinted footer-style note inside a section ("Requires X", "Note: …").
  */
 export function SettingsInfo({ children }: SettingsInfoProps) {
-  return <div className="printtool-settings-panel__info">{children}</div>
+  return <div className="craft-settings-panel__info">{children}</div>
 }

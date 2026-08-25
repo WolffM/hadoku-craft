@@ -43,13 +43,13 @@ export function TilingSettings({
 
   return (
     <SettingsPanel>
-      <div className="printtool-settings__group">
-        <label className="printtool-settings__label" htmlFor="paper-size">
+      <div className="craft-settings__group">
+        <label className="craft-settings__label" htmlFor="paper-size">
           Output Paper
         </label>
         <select
           id="paper-size"
-          className="printtool-settings__select"
+          className="craft-settings__select"
           value={paperSize}
           onChange={e => onPaperSizeChange(e.target.value as PaperSizeKey)}
         >
@@ -61,13 +61,13 @@ export function TilingSettings({
         </select>
       </div>
 
-      <div className="printtool-settings__group">
-        <label className="printtool-settings__label" htmlFor="tile-size">
+      <div className="craft-settings__group">
+        <label className="craft-settings__label" htmlFor="tile-size">
           Card Size
         </label>
         <select
           id="tile-size"
-          className="printtool-settings__select"
+          className="craft-settings__select"
           value={tileSize}
           onChange={e => onTileSizeChange(e.target.value as TileSizeKey)}
         >
@@ -79,14 +79,14 @@ export function TilingSettings({
         </select>
       </div>
 
-      <div className="printtool-settings__group">
-        <label className="printtool-settings__label" htmlFor="dpi">
+      <div className="craft-settings__group">
+        <label className="craft-settings__label" htmlFor="dpi">
           DPI
         </label>
         <input
           id="dpi"
           type="number"
-          className="printtool-settings__input"
+          className="craft-settings__input"
           value={dpi}
           onChange={handleDpiChange}
           min={72}
@@ -95,13 +95,13 @@ export function TilingSettings({
         />
       </div>
 
-      <div className="printtool-settings__group">
-        <label className="printtool-settings__label" htmlFor="position">
+      <div className="craft-settings__group">
+        <label className="craft-settings__label" htmlFor="position">
           Position
         </label>
         <select
           id="position"
-          className="printtool-settings__select"
+          className="craft-settings__select"
           value={position}
           onChange={e => onPositionChange(e.target.value as PositionOption)}
           disabled={disablePosition}
@@ -113,21 +113,21 @@ export function TilingSettings({
           ))}
         </select>
         {disablePosition && (
-          <span className="printtool-settings__hint">
+          <span className="craft-settings__hint">
             Position is locked to &quot;All&quot; in Duplex mode
           </span>
         )}
       </div>
 
       {layoutInfo && (
-        <div className="printtool-settings__layout-info">
-          <div className="printtool-settings__layout-label">Layout</div>
-          <div className="printtool-settings__layout-value">{formatLayoutInfo(layoutInfo)}</div>
+        <div className="craft-settings__layout-info">
+          <div className="craft-settings__layout-label">Layout</div>
+          <div className="craft-settings__layout-value">{formatLayoutInfo(layoutInfo)}</div>
         </div>
       )}
 
       {!layoutInfo && (
-        <div className="printtool-settings__layout-error">
+        <div className="craft-settings__layout-error">
           Card is too large for selected paper size
         </div>
       )}

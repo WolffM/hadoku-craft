@@ -3,7 +3,7 @@ import { AppHeader, LoadingSkeleton } from '@wolffm/task-ui-components'
 import { useHadokuTheme, HadokuThemeRoot } from '@wolffm/themes'
 import { logger } from '@wolffm/logger/client'
 import { usePrintTool } from './hooks/usePrintTool'
-import type { PrintToolProps } from './entry'
+import type { CraftProps } from './entry'
 
 // Components
 import { ModeSelector } from './components/ModeSelector/ModeSelector'
@@ -15,7 +15,7 @@ import { ProcessingOverlay, type ProcessingProgress } from './components/Progres
 
 // Mode registry — drives the tab strip, sidebar, validation, and processing
 import { getMode, type ModeActions, type ProcessingProgressUpdate } from './domain/modes'
-import { checkApiHealth } from './api/printToolApi'
+import { checkApiHealth } from './api/craftApi'
 
 /**
  * Provider boundary. Theme state is the platform's (@wolffm/themes), not this
@@ -23,7 +23,7 @@ import { checkApiHealth } from './api/printToolApi'
  * app/themeConfig.tsx copies are gone. AppHeader renders the shared picker
  * from this context, so nothing below passes one.
  */
-export default function App(props: PrintToolProps = {}) {
+export default function App(props: CraftProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null)
   return (
     <HadokuThemeRoot theme={props.theme} containerRef={containerRef}>
@@ -132,23 +132,23 @@ function AppInner({ containerRef }: { containerRef: RefObject<HTMLDivElement | n
   return (
     <div
       ref={containerRef}
-      className="printtool-container"
+      className="craft-container"
       data-theme={theme}
       data-dark-theme={isDarkTheme ? 'true' : 'false'}
     >
-      <div className="printtool">
+      <div className="craft">
         <AppHeader
-          title="Hadoku Print Tool"
+          title="Hadoku Craft"
           status={<ApiStatus status={apiStatus} onRetry={handleRetryHealth} />}
         />
 
-        <main className="printtool__content">
+        <main className="craft__content">
           <ModeSelector mode={state.mode} onModeChange={setMode} />
 
-          <div className="printtool__layout">
-            <div className="printtool__sidebar">{module_.renderSettings({ state, actions })}</div>
+          <div className="craft__layout">
+            <div className="craft__sidebar">{module_.renderSettings({ state, actions })}</div>
 
-            <div className="printtool__main">
+            <div className="craft__main">
               {state.riftboundDeck ? (
                 <RiftboundDeckEditor
                   deck={state.riftboundDeck}
@@ -160,7 +160,7 @@ function AppInner({ containerRef }: { containerRef: RefObject<HTMLDivElement | n
                 <>
                   <ResultPreview result={state.result} mode={state.mode} />
 
-                  {state.error && <div className="printtool__error">{state.error}</div>}
+                  {state.error && <div className="craft__error">{state.error}</div>}
 
                   <ActionButtons
                     mode={state.mode}

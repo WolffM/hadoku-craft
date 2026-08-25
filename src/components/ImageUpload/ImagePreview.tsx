@@ -29,35 +29,35 @@ export function ImagePreview({
   compact = false
 }: ImagePreviewProps) {
   const containerClass = compact
-    ? 'printtool-image-preview printtool-image-preview--compact'
-    : 'printtool-image-preview'
+    ? 'craft-image-preview craft-image-preview--compact'
+    : 'craft-image-preview'
 
   return (
     <div className={containerClass}>
-      {label && compact && <div className="printtool-image-preview__label">{label}</div>}
+      {label && compact && <div className="craft-image-preview__label">{label}</div>}
 
       <div
-        className="printtool-image-preview__container"
+        className="craft-image-preview__container"
         style={{ maxHeight: compact ? 100 : maxHeight }}
       >
-        <img src={image.dataUrl} alt={image.name} className="printtool-image-preview__image" />
+        <img src={image.dataUrl} alt={image.name} className="craft-image-preview__image" />
       </div>
 
       {showInfo && !compact && (
-        <div className="printtool-image-preview__info">
-          <span className="printtool-image-preview__name" title={image.name}>
+        <div className="craft-image-preview__info">
+          <span className="craft-image-preview__name" title={image.name}>
             {image.name}
           </span>
-          <span className="printtool-image-preview__dimensions">
+          <span className="craft-image-preview__dimensions">
             {image.width} × {image.height}
           </span>
-          <span className="printtool-image-preview__size">{formatFileSize(image.file.size)}</span>
+          <span className="craft-image-preview__size">{formatFileSize(image.file.size)}</span>
         </div>
       )}
 
       {compact && (
-        <div className="printtool-image-preview__info printtool-image-preview__info--compact">
-          <span className="printtool-image-preview__dimensions">
+        <div className="craft-image-preview__info craft-image-preview__info--compact">
+          <span className="craft-image-preview__dimensions">
             {image.width} × {image.height}
           </span>
         </div>
@@ -66,7 +66,7 @@ export function ImagePreview({
       {onClear && (
         <button
           type="button"
-          className="printtool-image-preview__clear"
+          className="craft-image-preview__clear"
           onClick={onClear}
           aria-label="Clear image"
         >

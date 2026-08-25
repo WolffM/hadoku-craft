@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <title>Print Tool - Dev</title>
+  <title>Hadoku Craft - Dev</title>
   <script>
     (function() {
       try {
@@ -37,7 +37,7 @@
     const params = new URLSearchParams(window.location.search)
     const theme = params.get('theme') || undefined // Let the app handle default theme
 
-    console.log('[mount] Mounting hadoku-printtool with:', { theme })
+    console.log('[mount] Mounting hadoku-craft with:', { theme })
 
     // Mount the app
     mount(document.getElementById('app'), {

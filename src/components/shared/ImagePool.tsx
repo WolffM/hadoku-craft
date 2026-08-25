@@ -162,15 +162,15 @@ export function ImagePool<T extends PooledImage = PooledImage>({
   }, [])
 
   return (
-    <div className="printtool-image-pool">
-      <div className="printtool-image-pool__header">
-        <h3 className="printtool-image-pool__title">
+    <div className="craft-image-pool">
+      <div className="craft-image-pool__header">
+        <h3 className="craft-image-pool__title">
           {title} ({images.length})
         </h3>
-        <div className="printtool-image-pool__header-right">
+        <div className="craft-image-pool__header-right">
           {rightSlot}
           {images.length > 0 && (
-            <button type="button" className="printtool-image-pool__clear-btn" onClick={onClear}>
+            <button type="button" className="craft-image-pool__clear-btn" onClick={onClear}>
               Clear All
             </button>
           )}
@@ -178,9 +178,9 @@ export function ImagePool<T extends PooledImage = PooledImage>({
       </div>
 
       <div
-        className={`printtool-image-pool__dropzone${
-          isDragOver ? ' printtool-image-pool__dropzone--dragover' : ''
-        }${isLoading ? ' printtool-image-pool__dropzone--loading' : ''}`}
+        className={`craft-image-pool__dropzone${
+          isDragOver ? ' craft-image-pool__dropzone--dragover' : ''
+        }${isLoading ? ' craft-image-pool__dropzone--loading' : ''}`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -199,19 +199,19 @@ export function ImagePool<T extends PooledImage = PooledImage>({
           type="file"
           accept={acceptAttr}
           multiple
-          className="printtool-image-pool__input"
+          className="craft-image-pool__input"
           onChange={handleInputChange}
           disabled={isLoading}
         />
         {isLoading ? (
-          <div className="printtool-image-pool__loading">
-            <span className="printtool-image-pool__spinner" />
-            <span className="printtool-image-pool__loading-text">
+          <div className="craft-image-pool__loading">
+            <span className="craft-image-pool__spinner" />
+            <span className="craft-image-pool__loading-text">
               Loading {progress.current} / {progress.total}
             </span>
-            <div className="printtool-image-pool__loading-bar">
+            <div className="craft-image-pool__loading-bar">
               <div
-                className="printtool-image-pool__loading-fill"
+                className="craft-image-pool__loading-fill"
                 style={{
                   width: `${progress.total ? (progress.current / progress.total) * 100 : 0}%`
                 }}
@@ -219,9 +219,9 @@ export function ImagePool<T extends PooledImage = PooledImage>({
             </div>
           </div>
         ) : (
-          <div className="printtool-image-pool__dropzone-content">
-            <span className="printtool-image-pool__dropzone-icon">+</span>
-            <span className="printtool-image-pool__dropzone-text">
+          <div className="craft-image-pool__dropzone-content">
+            <span className="craft-image-pool__dropzone-icon">+</span>
+            <span className="craft-image-pool__dropzone-text">
               Drop images here or click to add
             </span>
           </div>
@@ -229,24 +229,24 @@ export function ImagePool<T extends PooledImage = PooledImage>({
       </div>
 
       {images.length > 0 && (
-        <div className="printtool-image-pool__thumbnails">
+        <div className="craft-image-pool__thumbnails">
           {images.map(img => {
             const highlighted = isHighlighted?.(img) ?? false
             return (
               <div
                 key={img.id}
-                className={`printtool-image-pool__thumbnail${
-                  highlighted ? ' printtool-image-pool__thumbnail--highlighted' : ''
+                className={`craft-image-pool__thumbnail${
+                  highlighted ? ' craft-image-pool__thumbnail--highlighted' : ''
                 }`}
               >
                 <img
                   src={img.dataUrl}
                   alt={img.name}
-                  className="printtool-image-pool__thumbnail-img"
+                  className="craft-image-pool__thumbnail-img"
                 />
                 <button
                   type="button"
-                  className="printtool-image-pool__thumbnail-remove"
+                  className="craft-image-pool__thumbnail-remove"
                   onClick={e => {
                     e.stopPropagation()
                     onRemove(img.id)

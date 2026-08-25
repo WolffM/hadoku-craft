@@ -26,20 +26,20 @@ export function ProcessingOverlay({
     progress && progress.total > 0 ? Math.round((progress.step / progress.total) * 100) : 0
 
   return (
-    <div className="printtool-processing-overlay">
-      <div className="printtool-processing-overlay__content">
-        <div className="printtool-processing-overlay__spinner" />
-        <h3 className="printtool-processing-overlay__title">{title}</h3>
+    <div className="craft-processing-overlay">
+      <div className="craft-processing-overlay__content">
+        <div className="craft-processing-overlay__spinner" />
+        <h3 className="craft-processing-overlay__title">{title}</h3>
         {progress && (
-          <div className="printtool-processing-overlay__progress">
-            <span className="printtool-processing-overlay__message">{progress.message}</span>
-            <div className="printtool-processing-overlay__bar">
+          <div className="craft-processing-overlay__progress">
+            <span className="craft-processing-overlay__message">{progress.message}</span>
+            <div className="craft-processing-overlay__bar">
               <div
-                className="printtool-processing-overlay__fill"
+                className="craft-processing-overlay__fill"
                 style={{ width: `${percentage}%` }}
               />
             </div>
-            <span className="printtool-processing-overlay__stats">
+            <span className="craft-processing-overlay__stats">
               {progress.step} / {progress.total} ({percentage}%)
             </span>
           </div>

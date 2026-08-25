@@ -12,9 +12,9 @@ interface ApiStatusProps {
 
 export function ApiStatus({ status, onRetry }: ApiStatusProps) {
   return (
-    <div className={`printtool-api-status printtool-api-status--${status}`}>
-      <span className="printtool-api-status__indicator" />
-      <span className="printtool-api-status__text">
+    <div className={`craft-api-status craft-api-status--${status}`}>
+      <span className="craft-api-status__indicator" />
+      <span className="craft-api-status__text">
         {status === 'checking' && 'Checking API...'}
         {status === 'online' && 'API Online'}
         {status === 'offline' && 'API Offline'}
@@ -22,7 +22,7 @@ export function ApiStatus({ status, onRetry }: ApiStatusProps) {
       {status === 'offline' && onRetry && (
         <button
           type="button"
-          className="printtool-api-status__retry"
+          className="craft-api-status__retry"
           onClick={onRetry}
           title="Retry connection"
         >

@@ -101,15 +101,15 @@ export function TcgSettings({
   const sheetCountCustomMode = Math.max(1, Math.ceil(tcgCustomImages.length / cardsPerSheet))
 
   return (
-    <SettingsPanel className="printtool-tcg-settings">
+    <SettingsPanel className="craft-tcg-settings">
       <SettingsSection title="TCG Proxy Source" description={description}>
-        <div className="printtool-tcg-settings__group">
-          <label className="printtool-tcg-settings__label" htmlFor="tcg-game">
+        <div className="craft-tcg-settings__group">
+          <label className="craft-tcg-settings__label" htmlFor="tcg-game">
             Game
           </label>
           <select
             id="tcg-game"
-            className="printtool-tcg-settings__select"
+            className="craft-tcg-settings__select"
             value={tcgGame}
             onChange={e => onGameChange(e.target.value as TcgGame)}
           >
@@ -121,13 +121,13 @@ export function TcgSettings({
           </select>
         </div>
 
-        <div className="printtool-tcg-settings__tabs" role="tablist">
+        <div className="craft-tcg-settings__tabs" role="tablist">
           <button
             type="button"
             role="tab"
             aria-selected={tcgInputMode === 'list'}
-            className={`printtool-tcg-settings__tab ${
-              tcgInputMode === 'list' ? 'printtool-tcg-settings__tab--active' : ''
+            className={`craft-tcg-settings__tab ${
+              tcgInputMode === 'list' ? 'craft-tcg-settings__tab--active' : ''
             }`}
             onClick={() => onInputModeChange('list')}
           >
@@ -137,8 +137,8 @@ export function TcgSettings({
             type="button"
             role="tab"
             aria-selected={tcgInputMode === 'custom'}
-            className={`printtool-tcg-settings__tab ${
-              tcgInputMode === 'custom' ? 'printtool-tcg-settings__tab--active' : ''
+            className={`craft-tcg-settings__tab ${
+              tcgInputMode === 'custom' ? 'craft-tcg-settings__tab--active' : ''
             }`}
             onClick={() => onInputModeChange('custom')}
           >
@@ -149,23 +149,23 @@ export function TcgSettings({
         {tcgInputMode === 'list' ? (
           <>
             <textarea
-              className="printtool-tcg-settings__textarea"
+              className="craft-tcg-settings__textarea"
               value={tcgInput}
               onChange={e => onInputChange(e.target.value)}
               placeholder={source.placeholderExample}
               rows={10}
               spellCheck={false}
             />
-            <div className="printtool-tcg-settings__hint">
+            <div className="craft-tcg-settings__hint">
               {cardCount} card{cardCount === 1 ? '' : 's'} · {sheetCountListMode} sheet
               {sheetCountListMode === 1 ? '' : 's'}
             </div>
 
             {showEditorButton && (
-              <div className="printtool-tcg-settings__editor-launch">
+              <div className="craft-tcg-settings__editor-launch">
                 <button
                   type="button"
-                  className="printtool-riftbound-editor__button printtool-riftbound-editor__button--primary"
+                  className="craft-riftbound-editor__button craft-riftbound-editor__button--primary"
                   onClick={() => {
                     void handleBuildEditor()
                   }}
@@ -178,9 +178,9 @@ export function TcgSettings({
                     : 'Open Deck Editor'}
                 </button>
                 {editorMessage && (
-                  <p className="printtool-tcg-settings__editor-message">{editorMessage}</p>
+                  <p className="craft-tcg-settings__editor-message">{editorMessage}</p>
                 )}
-                <p className="printtool-tcg-settings__editor-hint">
+                <p className="craft-tcg-settings__editor-hint">
                   Pre-fetches every alt-art variant so you can pick per-card art before saving.
                 </p>
               </div>
@@ -196,14 +196,14 @@ export function TcgSettings({
               onClear={onClearCustomImages}
             />
             {tcgCustomImages.length > 0 && (
-              <div className="printtool-tcg-settings__hint">
+              <div className="craft-tcg-settings__hint">
                 {sheetCountCustomMode} sheet{sheetCountCustomMode === 1 ? '' : 's'}
               </div>
             )}
           </>
         )}
 
-        <label className="printtool-settings__checkbox">
+        <label className="craft-settings__checkbox">
           <input
             type="checkbox"
             checked={tcgCutlines}

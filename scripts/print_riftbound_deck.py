@@ -53,7 +53,7 @@ def fetch(url: str) -> bytes | None:
     req = urllib.request.Request(
         url,
         headers={
-            'User-Agent': 'hadoku-printtool/1.0 (+local script)',
+            'User-Agent': 'hadoku-craft/1.0 (+local script)',
             'Accept-Encoding': 'gzip',
         },
     )

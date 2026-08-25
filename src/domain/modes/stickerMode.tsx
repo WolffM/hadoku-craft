@@ -10,7 +10,7 @@ import {
   checkApiHealth,
   imageDataUrlToCanvas,
   dataUrlToBase64
-} from '../../api/printToolApi'
+} from '../../api/craftApi'
 
 export const stickerMode: ModeModule = {
   id: 'sticker',
@@ -44,7 +44,7 @@ export const stickerMode: ModeModule = {
     const isHealthy = await checkApiHealth()
     if (!isHealthy) {
       throw new Error(
-        'Local processing server is offline. Start it with: cd hadoku-printTool && pnpm local:start'
+        'Local processing server is offline. Start it with: cd hadoku-craft && pnpm local:start'
       )
     }
 

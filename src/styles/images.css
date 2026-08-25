@@ -5,7 +5,7 @@
  */
 
 /* ImagePool — shared multi-image upload + thumbnail grid */
-.printtool-image-pool {
+.craft-image-pool {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -15,27 +15,27 @@
   border-radius: var(--hdk-radius);
 }
 
-.printtool-image-pool__header {
+.craft-image-pool__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
 }
 
-.printtool-image-pool__header-right {
+.craft-image-pool__header-right {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.printtool-image-pool__title {
+.craft-image-pool__title {
   margin: 0;
   font-size: var(--hdk-text-sm);
   font-weight: var(--font-weight-semibold, 600);
   color: var(--color-text);
 }
 
-.printtool-image-pool__clear-btn {
+.craft-image-pool__clear-btn {
   padding: 0.25rem 0.5rem;
   background: transparent;
   border: 1px solid var(--color-border);
@@ -45,7 +45,7 @@
   cursor: pointer;
 }
 
-.printtool-image-pool__dropzone {
+.craft-image-pool__dropzone {
   position: relative;
   padding: 1.5rem;
   border: 2px dashed var(--color-border);
@@ -58,63 +58,63 @@
     border-color 0.15s ease;
 }
 
-.printtool-image-pool__dropzone:focus {
+.craft-image-pool__dropzone:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: -2px;
 }
 
-.printtool-image-pool__dropzone--dragover {
+.craft-image-pool__dropzone--dragover {
   border-color: var(--color-primary);
   background-color: var(--color-bg-card);
 }
 
-.printtool-image-pool__dropzone--loading {
+.craft-image-pool__dropzone--loading {
   cursor: progress;
 }
 
-.printtool-image-pool__input {
+.craft-image-pool__input {
   display: none;
 }
 
-.printtool-image-pool__dropzone-content {
+.craft-image-pool__dropzone-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
 }
 
-.printtool-image-pool__dropzone-icon {
+.craft-image-pool__dropzone-icon {
   font-size: 1.5rem;
   color: var(--color-text-secondary);
 }
 
-.printtool-image-pool__dropzone-text {
+.craft-image-pool__dropzone-text {
   font-size: var(--hdk-text-sm);
   color: var(--color-text-secondary);
 }
 
-.printtool-image-pool__loading {
+.craft-image-pool__loading {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
 }
 
-.printtool-image-pool__spinner {
+.craft-image-pool__spinner {
   width: 20px;
   height: 20px;
   border: 2px solid var(--color-border);
   border-top-color: var(--color-primary);
   border-radius: 50%;
-  animation: printtool-spin 0.6s linear infinite;
+  animation: craft-spin 0.6s linear infinite;
 }
 
-.printtool-image-pool__loading-text {
+.craft-image-pool__loading-text {
   font-size: var(--hdk-text-sm);
   color: var(--color-text-secondary);
 }
 
-.printtool-image-pool__loading-bar {
+.craft-image-pool__loading-bar {
   width: 100%;
   height: 4px;
   background-color: var(--color-border);
@@ -122,19 +122,19 @@
   overflow: hidden;
 }
 
-.printtool-image-pool__loading-fill {
+.craft-image-pool__loading-fill {
   height: 100%;
   background-color: var(--color-primary);
   transition: width 0.15s ease;
 }
 
-.printtool-image-pool__thumbnails {
+.craft-image-pool__thumbnails {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
   gap: 0.5rem;
 }
 
-.printtool-image-pool__thumbnail {
+.craft-image-pool__thumbnail {
   position: relative;
   aspect-ratio: 1;
   border: 1px solid var(--color-border);
@@ -143,18 +143,18 @@
   background-color: var(--color-bg-alt);
 }
 
-.printtool-image-pool__thumbnail--highlighted {
+.craft-image-pool__thumbnail--highlighted {
   outline: 2px solid var(--color-primary);
   outline-offset: -1px;
 }
 
-.printtool-image-pool__thumbnail-img {
+.craft-image-pool__thumbnail-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.printtool-image-pool__thumbnail-remove {
+.craft-image-pool__thumbnail-remove {
   position: absolute;
   top: 2px;
   right: 2px;
@@ -171,34 +171,34 @@
   transition: background-color 0.15s ease;
 }
 
-.printtool-image-pool__thumbnail-remove:hover {
+.craft-image-pool__thumbnail-remove:hover {
   background: var(--color-image-scrim-strong);
 }
 
-.printtool-image-pool__stats {
+.craft-image-pool__stats {
   display: flex;
   gap: 0.5rem;
   font-size: var(--hdk-text-xs);
 }
 
-.printtool-image-pool__stat {
+.craft-image-pool__stat {
   padding: 0.125rem 0.4rem;
   border-radius: 12px;
   background: var(--color-bg-alt);
   color: var(--color-text-secondary);
 }
 
-.printtool-image-pool__stat--used {
+.craft-image-pool__stat--used {
   background: var(--color-success-bg);
   color: var(--color-on-success-bg);
 }
 
-.printtool-image-pool__stat--unused {
+.craft-image-pool__stat--unused {
   background: var(--color-warning-bg);
   color: var(--color-on-warning-bg);
 }
 
-.printtool-image-pool__used-badge {
+.craft-image-pool__used-badge {
   position: absolute;
   bottom: 2px;
   right: 2px;
@@ -214,30 +214,30 @@
   font-weight: bold;
 }
 
-@keyframes printtool-spin {
+@keyframes craft-spin {
   to {
     transform: rotate(360deg);
   }
 }
 
 /* ImageUpload — single-image drag-and-drop + file picker */
-.printtool-image-upload {
+.craft-image-upload {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.printtool-image-upload--compact {
+.craft-image-upload--compact {
   gap: 0.25rem;
 }
 
-.printtool-image-upload__label {
+.craft-image-upload__label {
   font-size: var(--hdk-text-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text);
 }
 
-.printtool-image-upload__dropzone {
+.craft-image-upload__dropzone {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -251,54 +251,54 @@
   transition: all 0.2s ease;
 }
 
-.printtool-image-upload__dropzone:hover,
-.printtool-image-upload__dropzone--active {
+.craft-image-upload__dropzone:hover,
+.craft-image-upload__dropzone--active {
   border-color: var(--color-primary);
   background-color: var(--color-primary-bg);
 }
 
-.printtool-image-upload__dropzone--error {
+.craft-image-upload__dropzone--error {
   border-color: var(--color-danger);
 }
 
-.printtool-image-upload__dropzone--compact {
+.craft-image-upload__dropzone--compact {
   padding: 1rem;
   gap: 0.5rem;
 }
 
-.printtool-image-upload__icon {
+.craft-image-upload__icon {
   color: var(--color-text-muted);
 }
 
-.printtool-image-upload__text {
+.craft-image-upload__text {
   font-size: var(--hdk-text-sm);
   color: var(--color-text-secondary);
   text-align: center;
 }
 
-.printtool-image-upload__hint {
+.craft-image-upload__hint {
   font-size: var(--hdk-text-xs);
   color: var(--color-text-muted);
 }
 
-.printtool-image-upload__loading {
+.craft-image-upload__loading {
   font-size: var(--hdk-text-sm);
   color: var(--color-text-secondary);
 }
 
-.printtool-image-upload__error {
+.craft-image-upload__error {
   font-size: var(--hdk-text-sm);
   border-left: 3px solid var(--color-danger);
   padding-left: 0.5rem;
   color: var(--color-text);
 }
 
-.printtool-image-upload__input {
+.craft-image-upload__input {
   display: none;
 }
 
 /* ImagePreview — thumbnail of a single uploaded image */
-.printtool-image-preview {
+.craft-image-preview {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -309,30 +309,30 @@
   border-radius: var(--hdk-radius);
 }
 
-.printtool-image-preview--compact {
+.craft-image-preview--compact {
   padding: 0.5rem;
 }
 
-.printtool-image-preview__label {
+.craft-image-preview__label {
   font-size: var(--hdk-text-xs);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-secondary);
 }
 
-.printtool-image-preview__container {
+.craft-image-preview__container {
   display: flex;
   justify-content: center;
   overflow: hidden;
   border-radius: calc(var(--hdk-radius) - 4px);
 }
 
-.printtool-image-preview__image {
+.craft-image-preview__image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
 }
 
-.printtool-image-preview__info {
+.craft-image-preview__info {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -340,18 +340,18 @@
   color: var(--color-text-muted);
 }
 
-.printtool-image-preview__info--compact {
+.craft-image-preview__info--compact {
   justify-content: center;
 }
 
-.printtool-image-preview__name {
+.craft-image-preview__name {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.printtool-image-preview__clear {
+.craft-image-preview__clear {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -369,13 +369,13 @@
   transition: all 0.2s ease;
 }
 
-.printtool-image-preview__clear:hover {
+.craft-image-preview__clear:hover {
   background-color: var(--color-danger);
   color: var(--color-on-danger);
 }
 
 /* ResultPreview — final processed canvas, with multi-sheet picker */
-.printtool-result-preview {
+.craft-result-preview {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -386,18 +386,18 @@
   min-height: 300px;
 }
 
-.printtool-result-preview--empty {
+.craft-result-preview--empty {
   justify-content: center;
   align-items: center;
 }
 
-.printtool-result-preview__placeholder {
+.craft-result-preview__placeholder {
   text-align: center;
   color: var(--color-text-secondary);
   font-size: var(--hdk-text-sm);
 }
 
-.printtool-result-preview__toggle {
+.craft-result-preview__toggle {
   display: flex;
   gap: 0.25rem;
   padding: 0.25rem;
@@ -406,7 +406,7 @@
   align-self: center;
 }
 
-.printtool-result-preview__toggle-btn {
+.craft-result-preview__toggle-btn {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: calc(var(--hdk-radius) - 4px);
@@ -417,17 +417,17 @@
   transition: all 0.2s ease;
 }
 
-.printtool-result-preview__toggle-btn:hover {
+.craft-result-preview__toggle-btn:hover {
   background-color: var(--color-bg-hover);
 }
 
-.printtool-result-preview__toggle-btn--active {
+.craft-result-preview__toggle-btn--active {
   background-color: var(--color-bg-card);
   color: var(--color-text);
   box-shadow: var(--hdk-shadow-sm);
 }
 
-.printtool-result-preview__canvas-container {
+.craft-result-preview__canvas-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -435,14 +435,14 @@
   overflow: hidden;
 }
 
-.printtool-result-preview__canvas {
+.craft-result-preview__canvas {
   max-width: 100%;
   max-height: 100%;
   border: 1px solid var(--color-border);
   border-radius: calc(var(--hdk-radius) - 4px);
 }
 
-.printtool-result-preview__info {
+.craft-result-preview__info {
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -451,7 +451,7 @@
 }
 
 /* Multi-sheet picker (used by MTG mode when input > 9 cards) */
-.printtool-result-preview__sheet-picker {
+.craft-result-preview__sheet-picker {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -460,7 +460,7 @@
   border-bottom: 1px solid var(--color-border);
 }
 
-.printtool-result-preview__sheet-nav {
+.craft-result-preview__sheet-nav {
   width: 28px;
   height: 28px;
   padding: 0;
@@ -473,12 +473,12 @@
   cursor: pointer;
 }
 
-.printtool-result-preview__sheet-nav:disabled {
+.craft-result-preview__sheet-nav:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-.printtool-result-preview__sheet-label {
+.craft-result-preview__sheet-label {
   font-size: var(--hdk-text-sm);
   color: var(--color-text-secondary);
 }

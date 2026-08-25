@@ -50,23 +50,23 @@ export function CollageImagePool({
       isHighlighted={img => placedIds.has(img.id)}
       renderBadge={img =>
         placedIds.has(img.id) ? (
-          <span className="printtool-image-pool__used-badge" aria-label="Used in layout">
+          <span className="craft-image-pool__used-badge" aria-label="Used in layout">
             ✓
           </span>
         ) : null
       }
       rightSlot={
         layoutResult ? (
-          <div className="printtool-image-pool__stats">
-            <span className="printtool-image-pool__stat printtool-image-pool__stat--used">
+          <div className="craft-image-pool__stats">
+            <span className="craft-image-pool__stat craft-image-pool__stat--used">
               {usedCount} used
             </span>
             {unusedCount > 0 && (
-              <span className="printtool-image-pool__stat printtool-image-pool__stat--unused">
+              <span className="craft-image-pool__stat craft-image-pool__stat--unused">
                 {unusedCount} didn't fit
               </span>
             )}
-            <span className="printtool-image-pool__stat printtool-image-pool__stat--coverage">
+            <span className="craft-image-pool__stat craft-image-pool__stat--coverage">
               {coverage}% coverage
             </span>
           </div>

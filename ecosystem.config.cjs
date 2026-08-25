@@ -1,7 +1,7 @@
 /**
- * PM2 Ecosystem Configuration for hadoku-printTool
+ * PM2 Ecosystem Configuration for hadoku-craft
  *
- * Manages the local PrintTool server with ImageMagick processing.
+ * Manages the local Craft server with ImageMagick processing.
  * The Cloudflare Tunnel is managed separately by hadoku_site.
  *
  * Usage:
@@ -23,7 +23,7 @@ const serverDir = path.join(__dirname, 'server');
 module.exports = {
 	apps: [
 		{
-			name: 'printtool-server',
+			name: 'craft-server',
 			cwd: serverDir,
 			script: 'src/index.ts',
 			interpreter: 'node',

@@ -1,7 +1,7 @@
 {
-  "name": "@hadoku/printtool-local",
+  "name": "@hadoku/craft-local",
   "version": "1.0.0",
-  "description": "Local PrintTool processing server with ImageMagick",
+  "description": "Local Craft processing server with ImageMagick",
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "tsx src/index.ts"
   },
   "keywords": [
-    "printtool",
+    "craft",
     "imagemagick",
     "calibration",
     "local-server"
