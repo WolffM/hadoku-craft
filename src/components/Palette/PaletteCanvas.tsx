@@ -192,13 +192,15 @@ export function PaletteCanvas({
     (e: ReactWheelEvent<HTMLCanvasElement>) => {
       if (!image) return
       const factor = e.deltaY > 0 ? 1 - ZOOM_STEP : 1 + ZOOM_STEP
-      setZoom(prev => {
-        const next = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, prev * factor))
-        onZoomChange(next)
-        return next
-      })
+      // Computed from the current `zoom` rather than inside a setZoom updater:
+      // notifying the parent is a side effect, and StrictMode double-invokes
+      // updaters. One wheel tick is one zoom step, so there is nothing to batch
+      // and no reason to read through the updater.
+      const next = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoom * factor))
+      setZoom(next)
+      onZoomChange(next)
     },
-    [image, onZoomChange]
+    [image, zoom, onZoomChange]
   )
 
   const handlePointerDown = useCallback(
