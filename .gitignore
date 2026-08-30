@@ -53,3 +53,8 @@ coverage/
 # Scoped deliberately: the REST of .claude/ is tracked (2 files are here), and a
 # blanket `.claude/` would silently swallow the next file added to it.
 .claude/worktrees/
+
+# Per-machine agent permissions. Machine-local by name and by nature — 44 of the
+# 50 repos here already ignore it; the handful that tracked it reported
+# "uncommitted changes" on every nightly repo sync, forever.
+.claude/settings.local.json
