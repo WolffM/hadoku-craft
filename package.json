@@ -1,6 +1,6 @@
 {
   "name": "@wolffm/hadoku-craft",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": "Print-prep and color-palette toolkit: crop, resize, collate images for print, and extract palettes from images",
   "type": "module",
   "packageManager": "pnpm@11.5.0",
@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@hono/zod-openapi": "^1.1.5",
-    "@wolffm/logger": "^1.4.0",
+    "@wolffm/logger": "^1.4.1",
     "@wolffm/prefs-client": "^1.0.11",
     "hono": "^4.11.4",
     "pica": "^9.0.1",
