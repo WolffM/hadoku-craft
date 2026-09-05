@@ -1,6 +1,6 @@
 {
   "name": "@wolffm/hadoku-craft",
-  "version": "2.0.17",
+  "version": "2.0.18",
   "description": "Print-prep and color-palette toolkit: crop, resize, collate images for print, and extract palettes from images",
   "type": "module",
   "packageManager": "pnpm@11.5.0",
@@ -69,7 +69,7 @@
     "@vitejs/plugin-react": "^5.1.0",
     "@vitest/coverage-v8": "^4.1.7",
     "@wolffm/task-ui-components": "^4.8.1",
-    "@wolffm/themes": "^5.8.2",
+    "@wolffm/themes": "^5.8.3",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
