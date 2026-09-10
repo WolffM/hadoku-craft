@@ -18,6 +18,11 @@ export default [
       '**/*.test.ts',
       '**/*.test.tsx',
       '**/vite.config.ts',
+      // Config-time module: it resolves the app's display name from
+      // @wolffm/catalogue for both vite.config.ts and vitest.config.ts. Ignored
+      // alongside them because tsconfig's `include` is src-only, so typed
+      // linting cannot resolve a file at the repo root.
+      '**/app-name.ts',
       '**/vitest.config.ts',
       '**/server/**'
     ]
