@@ -20,7 +20,7 @@ export default function App(props: CraftProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null)
   return (
     <HadokuThemeRoot theme={props.theme} containerRef={containerRef}>
-      <AppInner containerRef={containerRef} />
+      <AppInner containerRef={containerRef} appName={props.appName} />
     </HadokuThemeRoot>
   )
 }
@@ -33,7 +33,13 @@ export default function App(props: CraftProps = {}) {
  * keeps both unmounted trees out of memory entirely, so a switch is a reset.
  * That is the intended behaviour: they are separate tools.
  */
-function AppInner({ containerRef }: { containerRef: RefObject<HTMLDivElement | null> }) {
+function AppInner({
+  containerRef,
+  appName
+}: {
+  containerRef: RefObject<HTMLDivElement | null>
+  appName?: string
+}) {
   const [systemPrefersDark] = useState(() =>
     window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)').matches : false
   )
@@ -57,7 +63,7 @@ function AppInner({ containerRef }: { containerRef: RefObject<HTMLDivElement | n
     >
       <div className="craft">
         <AppHeader
-          title="Craft"
+          title={appName ?? __HADOKU_APP_NAME__}
           status={
             route === 'print' ? <ApiStatus status={api.status} onRetry={api.retry} /> : undefined
           }
