@@ -57,7 +57,7 @@ function AppInner({ containerRef }: { containerRef: RefObject<HTMLDivElement | n
     >
       <div className="craft">
         <AppHeader
-          title="Hadoku Craft"
+          title="Craft"
           status={
             route === 'print' ? <ApiStatus status={api.status} onRetry={api.retry} /> : undefined
           }
