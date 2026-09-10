@@ -14,6 +14,8 @@ export const collageMode: ModeModule = {
 
   canProcess: state => state.collageImages.length > 0,
 
+  processDeps: state => [state.collageImages, state.collageSettings],
+
   renderSettings: ({ state, actions }) => (
     <>
       <CollageImagePool

@@ -18,6 +18,12 @@ import { ProcessingOverlay, type ProcessingProgress } from '../Progress/Processi
 
 // Mode registry — drives the tab strip, sidebar, validation, and processing
 import { getMode, type ModeActions, type ProcessingProgressUpdate } from '../../domain/modes'
+import type { PrintMode } from '../../domain/types'
+
+/** Per-element `Object.is`. See ModeModule.processDeps for why not a hash. */
+function sameDeps(a: readonly unknown[], b: readonly unknown[]): boolean {
+  return a.length === b.length && a.every((value, i) => Object.is(value, b[i]))
+}
 
 export function PrintRoute() {
   const tool = usePrintTool()
@@ -56,12 +62,31 @@ export function PrintRoute() {
 
   const [processingProgress, setProcessingProgress] = useState<ProcessingProgress | null>(null)
 
+  /**
+   * The mode + inputs that produced the result currently on screen, captured
+   * on the last successful run. While these still match, Process is greyed
+   * out: re-running would rebuild the identical sheet.
+   */
+  const [processedFrom, setProcessedFrom] = useState<{
+    mode: PrintMode
+    deps: readonly unknown[]
+  } | null>(null)
+
   const reportProgress = useCallback((p: ProcessingProgressUpdate | null) => {
     setProcessingProgress(p)
   }, [])
 
   const module_ = getMode(state.mode)
   const canProcess = module_.canProcess(state)
+
+  // Nothing has changed since the run that produced the on-screen result.
+  // Requires a result to actually be showing — after an error there is
+  // nothing to be up to date with, so the button stays live for a retry.
+  const isUpToDate =
+    state.result !== null &&
+    processedFrom !== null &&
+    processedFrom.mode === state.mode &&
+    sameDeps(processedFrom.deps, module_.processDeps(state))
 
   const handleProcess = useCallback(async () => {
     const mod = getMode(state.mode)
@@ -79,6 +104,10 @@ export function PrintRoute() {
         setCollageResult(result.collageLayout)
       }
       setResult(result)
+      // Only on success, and only from the state this run actually read —
+      // recomputed here rather than captured before `process()` so a mode that
+      // writes derived state mid-run is compared against what it settled on.
+      setProcessedFrom({ mode: state.mode, deps: mod.processDeps(state) })
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Processing failed'
       setError(message)
@@ -113,6 +142,7 @@ export function PrintRoute() {
               <ActionButtons
                 mode={state.mode}
                 canProcess={canProcess}
+                isUpToDate={isUpToDate}
                 isProcessing={state.isProcessing}
                 result={state.result}
                 dpi={state.mode === 'calibration' ? state.calibrationDpi : state.dpi}

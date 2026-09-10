@@ -71,6 +71,22 @@ export interface ModeModule {
   processingTitle?: string
   /** True when this mode has enough input to be processed. */
   canProcess: (state: PrintToolState) => boolean
+  /**
+   * Every piece of state this mode's `process()` reads, in a stable order.
+   * PrintRoute snapshots it on a successful run and greys out Process until
+   * one of them changes — re-running identical inputs can only reproduce the
+   * result that is already on screen.
+   *
+   * Compared by `Object.is` per element, never serialised: the entries are
+   * mostly image objects whose `dataUrl` is megabytes of base64, and the
+   * reducer already replaces the reference on every edit. That makes identity
+   * both cheaper and more accurate than a hash.
+   *
+   * Err towards listing too much. A missing entry leaves Process disabled
+   * after a real edit, which blocks the user; a redundant one only re-enables
+   * a button that was safe to press anyway.
+   */
+  processDeps: (state: PrintToolState) => readonly unknown[]
   /** Render the sidebar's settings panel for this mode. */
   renderSettings: (args: RenderSettingsArgs) => ReactNode
   /**

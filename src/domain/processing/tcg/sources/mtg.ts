@@ -13,7 +13,7 @@
  *   <name>, <set>
  *   <name>
  *   https://scryfall.com/card/<set>/<collector#>/<...>
- *   <count> <line>                  (e.g. "3 Lightning Bolt, M10, 150")
+ *   <count> <line>                  (e.g. "3 Lightning Bolt, M10, 146")
  *   # comment                       (ignored)
  */
 
@@ -40,9 +40,11 @@ interface ScryfallImageUris {
   png?: string
 }
 interface ScryfallCardFace {
+  name?: string
   image_uris?: ScryfallImageUris
 }
 interface ScryfallCard {
+  name?: string
   layout?: string
   image_uris?: ScryfallImageUris
   card_faces?: ScryfallCardFace[]
@@ -95,6 +97,53 @@ function pickImageUrl(uris?: ScryfallImageUris): string | undefined {
   return uris?.large || uris?.png || uris?.normal
 }
 
+/**
+ * Fold a card name to a comparable form: accent-stripped, punctuation-free,
+ * lowercase. "Lim-Dûl's Vault" and "lim duls vault" both become "limdulsvault".
+ *
+ * Æ/œ are spelled out because NFD does not decompose them and Scryfall does
+ * use them ("Æther Vial"), which nobody types.
+ */
+function foldName(name: string): string {
+  return name
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/æ/gi, 'ae')
+    .replace(/œ/gi, 'oe')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '')
+}
+
+/**
+ * Does `typed` name the card Scryfall returned?
+ *
+ * Multi-faced cards come back as "Front // Back", and a deck list names one
+ * face, so either side counts — as does `card_faces[].name`, which is where
+ * the split lives for layouts that populate it.
+ *
+ * Being strict is safe: a false negative just falls through to the name
+ * search, which is the more trustworthy lookup anyway.
+ */
+export function namesMatch(
+  card: { name?: string; card_faces?: { name?: string }[] },
+  typed: string
+): boolean {
+  const want = foldName(typed)
+  if (!want) return true
+
+  const candidates: string[] = []
+  if (card.name) {
+    candidates.push(card.name, ...card.name.split('//'))
+  }
+  for (const face of card.card_faces ?? []) {
+    if (face.name) candidates.push(face.name)
+  }
+  // No name on the payload at all — nothing to contradict, so accept it.
+  if (candidates.length === 0) return true
+
+  return candidates.some(c => foldName(c) === want)
+}
+
 function hasUsableImages(data: ScryfallCard | null): boolean {
   if (!data) return false
   return Boolean(data.image_uris || data.card_faces)
@@ -145,6 +194,26 @@ function parseLine(line: string): MtgEntry | null {
   }
 }
 
+/**
+ * Choose the result that best answers the name the user typed.
+ *
+ * Scryfall's search ranks by relevance, not exactness, and its first hit is
+ * routinely not the card asked for: `q=Lightning Bolt` returns "Emeritus of
+ * Conflict // Lightning Bolt" ahead of plain "Lightning Bolt". Taking data[0]
+ * is what put a split card on the sheet.
+ *
+ * A whole-name match therefore outranks a face match, which outranks
+ * Scryfall's own ordering.
+ */
+export function pickByName(results: ScryfallCard[], typed: string): ScryfallCard {
+  const want = foldName(typed)
+  return (
+    results.find(c => c.name && foldName(c.name) === want) ??
+    results.find(c => namesMatch(c, typed)) ??
+    results[0]
+  )
+}
+
 async function fetchCard(entry: CardEntry): Promise<FetchedCard | null> {
   const e = entry as MtgEntry
   let data: ScryfallCard | null = null
@@ -152,23 +221,41 @@ async function fetchCard(entry: CardEntry): Promise<FetchedCard | null> {
   // 1. Direct fetch by set + collector#
   if (e.setCode && e.collectorNumber) {
     const url = `${SCRYFALL_BASE}/${e.setCode.toLowerCase()}/${e.collectorNumber}`
-    data = await fetchJson<ScryfallCard>(url)
+    const direct = await fetchJson<ScryfallCard>(url)
     await sleep(SCRYFALL_DELAY_MS)
+
+    // A collector number is easy to get wrong and the result is a valid card,
+    // just the wrong one — "Lightning Bolt, M10, 150" is Panic Attack. Trust
+    // the name the human typed over the number and let the search below run.
+    if (direct && e.name && !namesMatch(direct, e.name)) {
+      logger.warn('[mtg-source] set/collector# names a different card than the line does', {
+        raw: e.raw,
+        typed: e.name,
+        found: direct.name,
+        url
+      })
+    } else {
+      data = direct
+    }
   }
 
   // 2. Name search fallback
   if (!hasUsableImages(data) && e.name) {
-    const q = encodeURIComponent(e.setCode ? `${e.name} set:${e.setCode}` : e.name)
+    const name = e.name
+    const q = encodeURIComponent(e.setCode ? `${name} set:${e.setCode}` : name)
     const search = await fetchJson<ScryfallSearchResponse>(`${SCRYFALL_BASE}/search?q=${q}`)
-    if (search?.data && search.data.length > 0) data = search.data[0]
+    const results = search?.data ?? []
+    if (results.length > 0) data = pickByName(results, name)
     await sleep(SCRYFALL_DELAY_MS)
   }
 
-  // 3. Collector-number search fallback
+  // 3. Collector-number search fallback. Same guard as stage 1 — this resolves
+  // by number too, so without it the wrong card returns through the back door.
   if (!hasUsableImages(data) && e.setCode && e.collectorNumber) {
     const q = encodeURIComponent(`cn:${e.collectorNumber} e:${e.setCode.toLowerCase()}`)
     const search = await fetchJson<ScryfallSearchResponse>(`${SCRYFALL_BASE}/search?q=${q}`)
-    if (search?.data && search.data.length > 0) data = search.data[0]
+    const hit = search?.data?.[0]
+    if (hit && (!e.name || namesMatch(hit, e.name))) data = hit
     await sleep(SCRYFALL_DELAY_MS)
   }
 
@@ -206,8 +293,8 @@ export const mtgSource: CardSource = {
   cardsPerRow: 3,
   cardsPerCol: 3,
   inputHelp:
-    'One card per line. Accepts a Scryfall URL or `name, set, collector#` (set / collector# optional). Optional leading count: `3 Lightning Bolt, M10, 150`.',
-  placeholderExample: `Lightning Bolt, M10, 150
+    'One card per line. Accepts a Scryfall URL or `name, set, collector#` (set / collector# optional). Optional leading count: `3 Lightning Bolt, M10, 146`.',
+  placeholderExample: `Lightning Bolt, M10, 146
 3 Sol Ring, c21, 263
 https://scryfall.com/card/neo/238/...`,
   parseLine,

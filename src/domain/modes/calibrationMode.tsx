@@ -15,6 +15,13 @@ export const calibrationMode: ModeModule = {
 
   canProcess: state => Boolean(state.sourceImage),
 
+  processDeps: state => [
+    state.sourceImage,
+    state.calibrationGrid,
+    state.calibrationDpi,
+    state.calibrationPreset
+  ],
+
   renderSettings: ({ state, actions }) => (
     <>
       <SourceImageSlot state={state} actions={actions} />

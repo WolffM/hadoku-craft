@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { mtgSource } from './mtg'
+import { mtgSource, namesMatch, pickByName } from './mtg'
 import { parseDeckList } from '../types'
 
 const parseLine = mtgSource.parseLine.bind(mtgSource)
@@ -113,5 +113,58 @@ https://scryfall.com/card/neo/238/the-wandering-emperor`
   it('returns an empty list for empty / whitespace input', () => {
     expect(parseDeckList('', mtgSource)).toEqual([])
     expect(parseDeckList('   \n  \n\t', mtgSource)).toEqual([])
+  })
+})
+
+describe('namesMatch', () => {
+  it('matches an exact name', () => {
+    expect(namesMatch({ name: 'Lightning Bolt' }, 'Lightning Bolt')).toBe(true)
+  })
+
+  it('ignores case, accents and punctuation', () => {
+    expect(namesMatch({ name: "Lim-Dûl's Vault" }, 'lim duls vault')).toBe(true)
+    expect(namesMatch({ name: 'Æther Vial' }, 'Aether Vial')).toBe(true)
+  })
+
+  it('matches either half of a split name', () => {
+    const card = { name: 'Emeritus of Conflict // Lightning Bolt' }
+    expect(namesMatch(card, 'Lightning Bolt')).toBe(true)
+    expect(namesMatch(card, 'Emeritus of Conflict')).toBe(true)
+  })
+
+  it('matches a card_faces entry', () => {
+    const card = {
+      name: 'Delver of Secrets // Insectile Aberration',
+      card_faces: [{ name: 'Delver of Secrets' }, { name: 'Insectile Aberration' }]
+    }
+    expect(namesMatch(card, 'Insectile Aberration')).toBe(true)
+  })
+
+  it('rejects a different card — the M10 150 case', () => {
+    expect(namesMatch({ name: 'Panic Attack' }, 'Lightning Bolt')).toBe(false)
+  })
+
+  it('accepts a payload with no name at all (nothing to contradict)', () => {
+    expect(namesMatch({}, 'Lightning Bolt')).toBe(true)
+  })
+})
+
+describe('pickByName', () => {
+  it('prefers the whole-name match over Scryfall relevance order', () => {
+    // The live ordering for q=Lightning Bolt: the split card ranks first.
+    const results = [{ name: 'Emeritus of Conflict // Lightning Bolt' }, { name: 'Lightning Bolt' }]
+    expect(pickByName(results, 'Lightning Bolt').name).toBe('Lightning Bolt')
+  })
+
+  it('falls back to a face match when no whole name matches', () => {
+    const results = [{ name: 'Something Else' }, { name: 'Emeritus of Conflict // Lightning Bolt' }]
+    expect(pickByName(results, 'Lightning Bolt').name).toBe(
+      'Emeritus of Conflict // Lightning Bolt'
+    )
+  })
+
+  it('falls back to the first result when nothing matches', () => {
+    const results = [{ name: 'Alpha' }, { name: 'Beta' }]
+    expect(pickByName(results, 'Nonexistent Card').name).toBe('Alpha')
   })
 })

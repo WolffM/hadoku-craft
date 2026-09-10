@@ -17,6 +17,8 @@ import {
 interface ActionButtonsProps {
   mode: PrintMode
   canProcess: boolean
+  /** Result on screen already reflects the current inputs — see ModeModule.processDeps. */
+  isUpToDate: boolean
   isProcessing: boolean
   result: ProcessedResult | null
   dpi: number
@@ -27,6 +29,7 @@ interface ActionButtonsProps {
 export function ActionButtons({
   mode,
   canProcess,
+  isUpToDate,
   isProcessing,
   result,
   dpi,
@@ -128,7 +131,12 @@ export function ActionButtons({
           type="button"
           className="craft-actions__button craft-actions__button--primary"
           onClick={onProcessClick}
-          disabled={!canProcess || showProcessing}
+          disabled={!canProcess || showProcessing || isUpToDate}
+          title={
+            isUpToDate && !showProcessing
+              ? 'The preview below already reflects these inputs. Change something to re-run.'
+              : undefined
+          }
         >
           {showProcessing ? (
             <>
@@ -139,6 +147,11 @@ export function ActionButtons({
             'Process'
           )}
         </button>
+        {/* A greyed button with no explanation is what made the original
+            report read as "clicking it did nothing" — say why it is off. */}
+        {isUpToDate && !showProcessing && (
+          <p className="craft-actions__hint">Preview is up to date</p>
+        )}
       </div>
 
       {result && result.sheets && result.sheets.length > 1 && (

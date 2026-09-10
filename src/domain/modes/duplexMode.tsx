@@ -15,6 +15,15 @@ export const duplexMode: ModeModule = {
 
   canProcess: state => Boolean(state.sourceImage && state.backImage && state.layoutInfo),
 
+  processDeps: state => [
+    state.sourceImage,
+    state.backImage,
+    state.layoutInfo,
+    state.paperSize,
+    state.tileSize,
+    state.dpi
+  ],
+
   renderSettings: ({ state, actions }) => {
     const frontOrientation = state.sourceImage
       ? state.sourceImage.width < state.sourceImage.height

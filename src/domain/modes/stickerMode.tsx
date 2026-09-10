@@ -19,6 +19,8 @@ export const stickerMode: ModeModule = {
 
   canProcess: state => state.stickerImages.length > 0,
 
+  processDeps: state => [state.stickerImages, state.stickerSettings],
+
   renderSettings: ({ state, actions }) => (
     <StickerSettings
       images={state.stickerImages}

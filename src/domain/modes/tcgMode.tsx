@@ -31,6 +31,17 @@ export const tcgMode: ModeModule = {
     return state.tcgCustomImages.length > 0
   },
 
+  // Both input branches are listed regardless of the active tcgInputMode:
+  // switching modes changes the output, so the mode itself is a dependency,
+  // and the inactive branch's value is cheap to compare.
+  processDeps: state => [
+    state.tcgGame,
+    state.tcgInputMode,
+    state.tcgInput,
+    state.tcgCustomImages,
+    state.tcgCutlines
+  ],
+
   renderSettings: ({ state, actions }) => (
     <TcgSettings
       tcgGame={state.tcgGame}

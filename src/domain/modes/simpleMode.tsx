@@ -15,6 +15,18 @@ export const simpleMode: ModeModule = {
 
   canProcess: state => Boolean(state.sourceImage && state.layoutInfo),
 
+  // paperSize/tileSize are not read directly by process() — they feed
+  // layoutInfo, which is. Listed anyway so a settings change re-enables
+  // Process even if layoutInfo is recomputed to an identical object.
+  processDeps: state => [
+    state.sourceImage,
+    state.layoutInfo,
+    state.paperSize,
+    state.tileSize,
+    state.dpi,
+    state.position
+  ],
+
   renderSettings: ({ state, actions }) => (
     <>
       <SourceImageSlot state={state} actions={actions} />
