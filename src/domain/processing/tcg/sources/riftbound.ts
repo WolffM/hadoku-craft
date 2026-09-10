@@ -107,6 +107,12 @@ function backUrl(setCode: string, num: string): string {
   return `${CDN_BASE}/${setCode}-${num}b.webp`
 }
 
+/**
+ * Deliberately silent, unlike the equivalents in ./mtg.ts: this is called for
+ * the BACK face of every card and ~96% of them legitimately 404, so logging
+ * here would bury a real failure under one line per single-faced card. The
+ * error that matters — no front face — is logged by `fetchCard` below.
+ */
 async function tryLoad(url: string): Promise<HTMLImageElement | null> {
   try {
     return await loadImage(url, { crossOrigin: 'anonymous' })

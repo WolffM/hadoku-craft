@@ -58,9 +58,23 @@ function sleep(ms: number): Promise<void> {
 async function fetchJson<T>(url: string): Promise<T | null> {
   try {
     const res = await fetch(url)
-    if (!res.ok) return null
+    // Not an error: stage 1 of the fallback chain 404s routinely on a wrong
+    // set/collector# and stage 2 is expected to pick it up. Debug, not warn.
+    if (!res.ok) {
+      logger.debug('[mtg-source] Scryfall returned non-OK', { url, status: res.status })
+      return null
+    }
     return (await res.json()) as T
-  } catch {
+  } catch (error) {
+    // The request never left the browser. A CSP refusal, an offline client and
+    // a DNS failure all arrive here as the same opaque `TypeError: Failed to
+    // fetch`, so log it rather than folding it into the null that means "no
+    // such card" — swallowing this is what made a blocked connect-src read as
+    // "No cards could be fetched" for a month with nothing in the console.
+    logger.error('[mtg-source] Scryfall request could not be made', {
+      url,
+      error: String(error)
+    })
     return null
   }
 }
@@ -68,7 +82,11 @@ async function fetchJson<T>(url: string): Promise<T | null> {
 async function loadScryfallImage(url: string): Promise<HTMLImageElement | null> {
   try {
     return await loadImage(url, { crossOrigin: 'anonymous' })
-  } catch {
+  } catch (error) {
+    // `<img>` reports every failure as a bare error event — a 404, a CORS
+    // rejection and an img-src refusal are indistinguishable here. Worth
+    // logging the URL: the host is the only clue to which one it was.
+    logger.error('[mtg-source] Card image failed to load', { url, error: String(error) })
     return null
   }
 }

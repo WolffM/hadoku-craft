@@ -15,6 +15,7 @@
  * the full-art / showcase variants when no explicit pick is made.
  */
 
+import { logger } from '@wolffm/logger/client'
 import nameToIdRaw from './riftbound-index.json'
 import nameVariantsRaw from './riftbound-index-variants.json'
 import type { RiftboundDeck, RiftboundDeckSlot } from '../../../types'
@@ -105,7 +106,10 @@ export function parseDeckForEditor(text: string): {
 async function fetchVariantAsDataUrl(id: string): Promise<string | null> {
   try {
     const resp = await fetch(`${CDN_BASE}/${id}.webp`, { mode: 'cors' })
-    if (!resp.ok) return null
+    if (!resp.ok) {
+      logger.debug('[riftbound-deck] Variant image not on CDN', { id, status: resp.status })
+      return null
+    }
     const blob = await resp.blob()
     return await new Promise<string | null>(resolve => {
       const reader = new FileReader()
@@ -113,7 +117,14 @@ async function fetchVariantAsDataUrl(id: string): Promise<string | null> {
       reader.onerror = () => resolve(null)
       reader.readAsDataURL(blob)
     })
-  } catch {
+  } catch (error) {
+    // Same opaque `TypeError: Failed to fetch` as the MTG source — the request
+    // was refused before it left the browser, which is not the same thing as
+    // the CDN not having the variant. See fetchJson in ./mtg.ts.
+    logger.error('[riftbound-deck] Variant request could not be made', {
+      id,
+      error: String(error)
+    })
     return null
   }
 }
