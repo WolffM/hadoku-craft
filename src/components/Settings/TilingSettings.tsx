@@ -4,6 +4,7 @@
  */
 
 import React from 'react'
+import { NumberInput } from '@wolffm/task-ui-components'
 import type { PaperSizeKey, TileSizeKey, PositionOption, LayoutInfo } from '../../domain/types'
 import { PAPER_SIZES, TILE_SIZES, POSITION_OPTIONS } from '../../domain/constants'
 import { formatLayoutInfo } from '../../domain/processing'
@@ -83,10 +84,9 @@ export function TilingSettings({
         <label className="craft-settings__label" htmlFor="dpi">
           DPI
         </label>
-        <input
+        <NumberInput
           id="dpi"
-          type="number"
-          className="craft-settings__input"
+          className="craft-settings__number"
           value={dpi}
           onChange={handleDpiChange}
           min={72}

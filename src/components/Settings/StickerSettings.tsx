@@ -9,6 +9,7 @@
  *   - testMode → --test
  */
 
+import { NumberInput } from '@wolffm/task-ui-components'
 import type {
   StickerImage,
   StickerSettings as StickerSettingsType,
@@ -59,16 +60,15 @@ export function StickerSettings({
           <label className="craft-sticker-settings__label" htmlFor="sticker-copies">
             Copies per image
           </label>
-          <input
+          <NumberInput
             id="sticker-copies"
-            type="number"
             min={1}
             max={50}
             value={settings.copies}
             onChange={e =>
               onSettingsChange({ copies: Math.max(1, parseInt(e.target.value, 10) || 1) })
             }
-            className="craft-sticker-settings__input"
+            className="craft-sticker-settings__number"
           />
         </div>
 
@@ -95,9 +95,8 @@ export function StickerSettings({
           <label className="craft-sticker-settings__label" htmlFor="sticker-custom-offset">
             Custom offset (inches, overrides preset)
           </label>
-          <input
+          <NumberInput
             id="sticker-custom-offset"
-            type="number"
             min={0.01}
             max={0.5}
             step={0.01}
@@ -107,7 +106,7 @@ export function StickerSettings({
               onSettingsChange({ customOffsetInches: v === '' ? null : parseFloat(v) })
             }}
             placeholder="(unused)"
-            className="craft-sticker-settings__input"
+            className="craft-sticker-settings__number"
           />
         </div>
 

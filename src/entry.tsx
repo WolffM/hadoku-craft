@@ -8,6 +8,7 @@ import '@wolffm/task-ui-components/theme-picker.css'
 import '@wolffm/task-ui-components/app-header.css'
 // REQUIRED: toast styles for the palette route's notifications
 import '@wolffm/task-ui-components/toaster.css'
+import '@wolffm/task-ui-components/number-input.css'
 import './styles/index.css'
 
 // Props interface for configuration from parent app

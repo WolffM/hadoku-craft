@@ -74,8 +74,7 @@
   color: var(--color-text);
 }
 
-.craft-settings__select,
-.craft-settings__input {
+.craft-settings__select {
   box-sizing: border-box;
   width: 100%;
   padding: 0.5rem 0.75rem;
@@ -87,14 +86,24 @@
   transition: border-color 0.2s ease;
 }
 
-.craft-settings__select:focus,
-.craft-settings__input:focus {
+/* <NumberInput> draws its own border and focus ring; match the selects beside it. */
+.craft-settings__number {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: calc(var(--hdk-radius) - 2px);
+  background-color: var(--color-bg);
+}
+
+.craft-settings__number .hdk-number__input {
+  padding: 0.5rem 0.75rem;
+}
+
+.craft-settings__select:focus {
   outline: none;
   border-color: var(--color-primary);
 }
 
-.craft-settings__select:disabled,
-.craft-settings__input:disabled {
+.craft-settings__select:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -319,15 +328,10 @@
   color: var(--color-text);
 }
 
-.craft-sticker-settings__input {
+.craft-sticker-settings__number {
   box-sizing: border-box;
   width: 100%;
-  padding: 0.4rem 0.6rem;
-  border: 1px solid var(--color-border);
   border-radius: calc(var(--hdk-radius) - 2px);
-  background-color: var(--color-bg-card);
-  color: var(--color-text);
-  font-size: var(--hdk-text-sm);
 }
 
 .craft-sticker-settings__radio-group {
