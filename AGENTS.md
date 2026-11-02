@@ -112,8 +112,7 @@ Read `node_modules/@wolffm/themes/THEME_USAGE_GUIDE.md` before writing styles.
 
 ## Versioning
 
-Pre-commit hook auto-bumps patch version on every commit.
-Patch rolls over at .20 → bumps minor. CI also bumps if version already published.
+The version is CI's, never a commit's — nobody edits it and no hook bumps it. The publish workflow's `Version` step (`WolffM/hadoku-actions/next-version@v1`) sets it to one patch above the registry's newest, in the CI workspace only, and nothing is committed back. A committed version above the registry is kept, so a deliberate major/minor bump stays possible.
 
 ## Telemetry: where your app's data lives
 
