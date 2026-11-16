@@ -38,6 +38,8 @@ duplexed for postcards, auto-packed as a collage, laid out as trading-card
 proxies, or prepared as die-cut stickers. Palette turns an image into a set of
 colours you can copy or export, picked by hand or found automatically.
 
+![Craft's Print route: the mode tabs across the top, a source-image drop zone and paper settings on the left, and the result pane on the right](images/print.webp)
+
 - [Features](features.md): what each mode does and how to drive it.
 - [Contributing](contributing.md): running it locally, the architecture, the
   checks it must pass.

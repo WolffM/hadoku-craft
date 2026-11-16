@@ -87,6 +87,8 @@ saying so. There is no preview of the cutline before processing.
 **What it does.** Builds a palette of up to 21 colours from an image, by hand
 or automatically.
 
+![Craft's Palette route before an image is loaded: an Upload Image button, a drop zone, and an empty 21-colour palette panel](images/palette.webp)
+
 - **Click the image** to sample one colour (averaged over a 3×3 pixel block,
   so JPEG compression noise doesn't decide the value).
 - **Prefill** extracts the image's dominant colours directly.
@@ -126,7 +128,7 @@ list instead.
 ## Trivia
 
 A prefill built for 21 colour slots from a flat, two-colour test graphic once
-came back with only five distinct swatches: an "empty" colour box, one with
-no pixels sampled into it, falls back to its geometric midpoint, a colour
-that is nowhere in the picture, and that case is now discarded rather than
+came back with only five distinct swatches. An "empty" colour box has no
+pixels sampled into it, so it fell back to its geometric midpoint: a colour
+that is nowhere in the picture. That case is now discarded rather than
 counted (`550bf7a`).

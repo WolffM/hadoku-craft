@@ -40,8 +40,17 @@ Palette need no server at all — they run entirely in the browser.
 
 ## Architecture
 
+```mermaid
+flowchart LR
+    Browser["Browser (Craft, mounted into a host page)"] --> Worker["Worker API (./api subpath, Cloudflare)"]
+    Browser --> Tunnel["Cloudflare Tunnel"]
+    Tunnel --> Server["Local server (ImageMagick + Python sidecar)"]
+```
+
 Craft ships as a library, not a standalone site: an entry point a host page
 mounts, plus a separate Worker API handler the host's own backend wires in.
+Calibration Sheet and Stickers are the two modes that need the local server;
+every other mode runs entirely in the browser.
 
 | Path                  | What it is                                                                                                                                                   |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -105,6 +114,6 @@ you start it on.
 ## Trivia
 
 This repo had no pull-request CI at all until one was added that
-deliberately runs unfiltered on every PR and every push: a required check
+deliberately runs unfiltered, on every PR and every push. A required check
 that only runs when certain files change is a gate that is silently absent
 on some pull requests and never-ending on others (`7816dc0`).
