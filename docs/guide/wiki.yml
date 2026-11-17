@@ -1,0 +1,26 @@
+title: Craft
+summary: >-
+  Print-prep and colour toolkit: lay a photo (or a pool of them) out on a
+  sheet for printing, or pull a colour palette out of an image. Two routes,
+  no sign-in, open to anyone who can reach the site.
+features:
+  - name: Print sheets
+    summary: 'Tile, duplex, collage or calibration-test an image for printing.'
+    anchor: print-sheets
+  - name: TCG proxy sheets
+    summary: 'Lay out Magic or Riftbound proxies at true card size, from a deck list, a URL list or your own images.'
+    anchor: tcg-proxy-sheets
+  - name: Sticker sheets
+    summary: 'Background removal and cutlines for die-cut stickers, from a pool of images.'
+    anchor: sticker-sheets
+  - name: Palette extraction
+    summary: 'Click a pixel, or let it find up to 21 colours in an image automatically.'
+    anchor: palette-extraction
+  - name: Palette export
+    summary: 'Copy the palette as hex, or export it as a labelled PNG grid.'
+    anchor: palette-export
+trivia:
+  - 'Craft started life as a different app entirely: its first commit called it `hadoku-printtool` (`7b87187`).'
+  - 'Its palette route began life as its own small repo; the last commit there, a week before Craft absorbed it, was `WolffM/color_palette_picker@e42fc45`.'
+  - 'The card-proxy mode started out naming one game, MTG, in its own code (`mtgMode`); the very next commit, 24 minutes later, renamed it to support any trading card game, Riftbound included (`4a446a7`).'
+  - "Quantizing a flat two-colour graphic for 21 palette slots once came back with five, because an 'empty' colour box has no pixels to average and reports a colour that is nowhere in the picture (`550bf7a`)."
