@@ -67,7 +67,7 @@ every other mode runs entirely in the browser.
 Routing is hand-rolled on purpose: this app ships into a host page that
 already owns the document, so a router dependency would not earn its weight.
 Switching routes uses `pushState`, not a real navigation, which would tear
-down the host page.
+down the host page. Back and forward still work, via `popstate`.
 
 **Print modes** (`src/domain/modes/`) implement one shared `ModeModule`
 contract — an id, a label, `canProcess`, `processDeps` (what to compare to
@@ -99,6 +99,16 @@ Colour comes only from the shared theme's tokens (`--color-*`); no hex
 literals, no `var(--x, fallback)`. `pnpm lint:css` is the gate that catches a
 token the theme doesn't define, since an undefined token silently renders as
 nothing rather than failing to build.
+
+Logging goes through the logger from `@wolffm/task-ui-components`, not
+`console.log` — logs are visible only to admins in dev mode:
+
+```typescript
+import { logger } from '@wolffm/task-ui-components'
+
+logger.info('Message', { key: 'value' })
+logger.error('Error occurred', error)
+```
 
 ## How it deploys
 
