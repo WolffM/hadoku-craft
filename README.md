@@ -1,5 +1,7 @@
 # @wolffm/hadoku-craft
 
+**Guide:** [overview](docs/guide/index.md) · [features](docs/guide/features.md) · [contributing](docs/guide/contributing.md) · [history](docs/guide/history.md) · [trivia](docs/guide/trivia.md)
+
 Print-prep and colour toolkit: tile, collage and lay out images for print, and pull colour
 palettes out of them.
 
