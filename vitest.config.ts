@@ -11,6 +11,10 @@ export default defineConfig({
     environment: 'happy-dom',
     include: ['src/**/*.test.{ts,tsx}'],
     globals: false,
+    // The JSON report is what CI's report-tests step posts to the fleet test
+    // store. In the config, not on the CLI: a CLI --reporter replaces these.
+    reporters: ['default', 'json'],
+    outputFile: { json: 'reports/vitest.json' },
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],

@@ -39,6 +39,7 @@ pnpm-debug.log*
 
 # Testing
 coverage/
+reports/
 .nyc_output/
 
 # IDE

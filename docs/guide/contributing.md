@@ -90,8 +90,10 @@ pnpm test         # vitest (canvas mocked; no real DOM needed)
 pnpm format:check # prettier, including this guide's own files
 ```
 
-Two of these, typecheck and lint (ESLint plus the stylelint/token check),
-run in CI on every pull request and on every push to the default branch.
+Typecheck, lint (ESLint plus the stylelint/token check) and the unit tests
+run in CI on every pull request and on every push to the default branch;
+every test's result goes to the platform's fleet-wide test store, red runs
+included. The local server (`server/`) has no tests of its own.
 Palette's logic has the heaviest test coverage, since it is pure and has no
 DOM to mock.
 
